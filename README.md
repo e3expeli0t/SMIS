@@ -1,1 +1,1 @@
-#School Moduler Information System (SMIS)
+# School Moduler Information System (SMIS)
