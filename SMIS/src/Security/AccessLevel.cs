@@ -10,5 +10,6 @@ namespace SMISSecurity
         Admin = 0x0,
         AdminUser = 0x1,
         RegularUser = 0x2,
+        Default = 0x2,
     }
 }

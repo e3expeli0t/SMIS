@@ -51,80 +51,79 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SMISDBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="src\Classes.cs">
+    <Compile Include="src\Forms\Classes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\Classes.Designer.cs">
+    <Compile Include="src\Forms\Classes.Designer.cs">
       <DependentUpon>Classes.cs</DependentUpon>
     </Compile>
     <Compile Include="src\DBElement.cs" />
-    <Compile Include="src\Groups.cs">
+    <Compile Include="src\Forms\Groups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\Groups.Designer.cs">
+    <Compile Include="src\Forms\Groups.Designer.cs">
       <DependentUpon>Groups.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Init.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Init.Designer.cs">
-      <DependentUpon>Init.cs</DependentUpon>
     </Compile>
     <Compile Include="src\Internal\Errors.cs" />
     <Compile Include="src\Internal\Field.cs" />
-    <Compile Include="src\Login.cs">
+    <Compile Include="src\Forms\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\Login.Designer.cs">
+    <Compile Include="src\Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\MainMenu.cs">
+    <Compile Include="src\Forms\MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\MainMenu.Designer.cs">
+    <Compile Include="src\Forms\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Security\AccessLevel.cs" />
+    <Compile Include="src\Security\Login.cs" />
+    <Compile Include="src\Security\RandomString.cs" />
     <Compile Include="src\Security\UnauthorisedUserException.cs" />
-    <Compile Include="src\Students.cs">
+    <Compile Include="src\Forms\Students.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\Students.Designer.cs">
+    <Compile Include="src\Forms\Students.Designer.cs">
       <DependentUpon>Students.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\Subjects.cs">
+    <Compile Include="src\Forms\Subjects.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\Subjects.Designer.cs">
+    <Compile Include="src\Forms\Subjects.Designer.cs">
       <DependentUpon>Subjects.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\Teachers.cs">
+    <Compile Include="src\Forms\Teachers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\Teachers.Designer.cs">
+    <Compile Include="src\Forms\Teachers.Designer.cs">
       <DependentUpon>Teachers.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\TecherTime.cs">
+    <Compile Include="src\Forms\TecherTime.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\TecherTime.Designer.cs">
+    <Compile Include="src\Forms\TecherTime.Designer.cs">
       <DependentUpon>TecherTime.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\ViewSchedualerInfo.cs">
+    <Compile Include="src\Forms\ViewSchedualerInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\ViewSchedualerInfo.Designer.cs">
+    <Compile Include="src\Forms\ViewSchedualerInfo.Designer.cs">
       <DependentUpon>ViewSchedualerInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="src\Classes.resx">
+    <EmbeddedResource Include="src\Forms\Classes.resx">
       <DependentUpon>Classes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\Init.resx">
-      <DependentUpon>Init.cs</DependentUpon>
+    <EmbeddedResource Include="src\Forms\Groups.resx">
+      <DependentUpon>Groups.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\MainMenu.resx">
+    <EmbeddedResource Include="src\Forms\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -136,7 +135,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="src\Teachers.resx">
+    <EmbeddedResource Include="src\Forms\Teachers.resx">
       <DependentUpon>Teachers.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
