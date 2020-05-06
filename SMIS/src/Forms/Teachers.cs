@@ -16,6 +16,15 @@ namespace SMIS
     public partial class Teachers : Form
     {
         private List<String> hours = new List<string>();
+        private String hlist = null;
+        private bool EditMode = false;
+
+        private const int FIRST_NAME = 1;
+        private const int LAST_NAME = 2;
+        private const int PHONE = 3;
+        private const int ADDRESS = 5;
+        private const int HOURES = 6;
+
 
         public Teachers(AccessLevel level)
         {
@@ -31,11 +40,17 @@ namespace SMIS
         //need to check if the view filled successfully
         private void Teachers_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'SmisDataSet.Teachers' table. You can move, or remove it, as needed.
-            this.teachersTableAdapter.Fill(this.SmisDataSet.Teachers);
+            // TODO: This line of code loads data into the 'smisDataSet.Teachers' table. You can move, or remove it, as needed.
+            this.teachersTableAdapter.Fill(this.smisDataSet.Teachers);
         }
 
-        public static  bool exist(string elem)
+
+        //------------------------------------------------------------------------------------------------------------
+        //SBElement interface functions 
+
+
+
+        public static bool exist(string elem)
         {
             //throw new NotImplementedException();
             return true;
@@ -46,21 +61,37 @@ namespace SMIS
             throw new NotImplementedException();
         }
 
-        private void AddHour_Click(object sender, EventArgs e)
-        {
-            this.hours.Add(this.TimePicker.Text);
-        }
 
-        private void DoSave_Click(object sender, EventArgs e)
+        //----------------------------------------------------------------------------------------------------------------
+        //Parsing functions
+        private String generateTimeList()
         {
-            if (!Field.Valid(this.TeacherName.Text, this.PhoneNumber.Text, this.Address.Text)) {
-                Errors.DisplayMinor("One or more input fields are empty");
-                return;
+            if (!this.hours.Any())
+            {
+                Errors.DisplayMinor("Please choose teacher time");
+                return null;
             }
 
+            String hrs = "$";
+
+            foreach (String hour in this.hours)
+            {
+                hrs += hour + "$";
+            }
+
+            this.hlist = hrs;
+
+            return hrs;
+        }
+
+        private Dictionary<String, String> parseName()
+        {
             String[] names = this.TeacherName.Text.Split(' ', '\t');
-            if (names.Length < 2) {
+
+            if (names.Length < 2)
+            {
                 Errors.DisplayMinor("Please supply full name.");
+                return null;
             }
 
             String firstName = names[0];
@@ -79,25 +110,143 @@ namespace SMIS
 
                 firstName = firstName.Take(firstName.Length - 1).ToString();
             }
+            Dictionary<string, string> names_dict = new Dictionary<string, string>();
+
+            names_dict.Add("first_name", firstName);
+            names_dict.Add("last_name", lastName);
+
+            return names_dict;
+        }
+
+        //---------------------------------------------------------------------------------------------------
+        // Button evenets functions
 
 
-            if (!this.hours.Any()) {
-                Errors.DisplayMinor("Please choose teacher time");
+        private void DoSave_Click(object sender, EventArgs e)
+        {
+            //if the flag EditMode is set Save acts like The edit buuton =
+            //the implementation is not pretty but this makes the UI look cleaner
+            if (EditMode)
+            {
+                cancelEdit();
+                Dictionary<string, string> names = this.parseName();
+
+                if (names == null)
+                {
+                    return;
+                }
+
+                this.EditRow(names["first_name"], names["last_name"], this.PhoneNumber.Text, Address.Text);
                 return;
             }
 
-            String hrs = this.hours.First();
-
-            foreach (String hour in this.hours) {
-                hrs += "$" + hrs;
+            if (!Field.Valid(this.TeacherName.Text, this.PhoneNumber.Text, this.Address.Text))
+            {
+                Errors.DisplayMinor("One or more input fields are empty");
+                return;
             }
 
             String id = RandomString.Generate();
+            String hrs = generateTimeList();
 
-            //todo: Change hrs to string
-            this.SmisDataSet.Teachers.AddTeachersRow(id, firstName, lastName, this.PhoneNumber.Text, 
-                (int) AccessLevel.Default, this.Address.Text, 123344);
+            if (hrs == null)
+            {
+                return;
+            }
+
+            Dictionary<string, string> namesDict = this.parseName();
+
+            if (namesDict == null)
+            {
+                return;
+            }
+
+            this.hours.Clear();
+
+            this.smisDataSet.Teachers.AddTeachersRow(id, namesDict["first_name"], namesDict["last_name"], this.PhoneNumber.Text,
+                (int)AccessLevel.Default, this.Address.Text, hrs);
         }
 
+        private void AddHour_Click(object sender, EventArgs e)
+        {
+            if (EditMode)
+            {
+                EditHours eh = new EditHours(this.hlist);
+                eh.Show();
+                this.hlist = eh.GetHours();
+            }
+            else
+            {
+                this.hours.Add(this.TimePicker.Text);
+            }
+        }
+
+        private void TeachersView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.EditMode = true;
+            this.AddHour.Text = "Edit time";
+            this.DoDelete.Text = "Cancel";
+            this.DoSave.Text = "Edit";
+            this.fillFromRow();
+        }
+
+        private void DoDelete_Click(object sender, EventArgs e)
+        {
+            if (EditMode)
+            {
+                cancelEdit();
+                return;
+            }
+            Errors.DisplayMajor("Can't remove item");
+        }
+
+        //--------------------------------------------------------------------------------------------------------------------
+        //Helpers
+
+
+        private void cancelEdit()
+        {
+            this.EditMode = false;
+            this.AddHour.Text = "Add time";
+            this.DoSave.Text = "Save";
+            this.DoDelete.Text = "Delete";
+        }
+
+        private bool EditRow(String fname, String lname, String phone, String addrs)
+        {
+            int index = this.TeachersView.CurrentRow.Index;
+            try
+            {
+                this.smisDataSet.Teachers.Rows[index][FIRST_NAME] = fname;
+                this.smisDataSet.Teachers.Rows[index][LAST_NAME] = lname;
+                this.smisDataSet.Teachers.Rows[index][PHONE] = phone;
+                this.smisDataSet.Teachers.Rows[index][ADDRESS] = addrs;
+            }
+            catch (Exception e)
+            {
+                SMISInternal.Errors.HandleException(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void fillFromRow()
+        {
+            try
+            {
+                int index = this.TeachersView.CurrentRow.Index;
+                this.TeacherName.Text = this.smisDataSet.Teachers.Rows[index][FIRST_NAME].ToString() +
+                    " " + this.smisDataSet.Teachers.Rows[index][LAST_NAME].ToString();
+                this.PhoneNumber.Text = this.smisDataSet.Teachers.Rows[index][PHONE].ToString();
+                this.Address.Text = this.smisDataSet.Teachers.Rows[index][ADDRESS].ToString();
+
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Errors.HandleException(e);
+                return;
+            }
+        }
     }
 }

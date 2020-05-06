@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Security.Cryptography;  
+using System.Security.Cryptography;
 
 namespace SMISSecurity
 {
@@ -10,14 +10,16 @@ namespace SMISSecurity
     {
         private static String seed = "S8XQYnydI3b1Kce8yAXjKozqLm8m1bJbnWN0FLJIaD7gEVsw";
 
-        public static void SetSeed(String s) {
+        public static void SetSeed(String s)
+        {
             seed += s;
             Shuffle();
         }
 
         //https://www.c-sharpcorner.com/article/compute-sha256-hash-in-c-sharp/
-        public static String Generate() {
-            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()abcdefghijklmnopqrtsuvwxyz"+seed;
+        public static String Generate()
+        {
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()abcdefghijklmnopqrtsuvwxyz" + seed;
             Random random = new Random();
 
             String rString = new string(Enumerable.Repeat(chars, 128)
@@ -27,7 +29,8 @@ namespace SMISSecurity
         }
 
 
-        public static String sha265(String str) {
+        public static String sha265(String str)
+        {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())
             {
@@ -41,7 +44,7 @@ namespace SMISSecurity
                     builder.Append(bytes[i].ToString("x2"));
                 }
                 return builder.ToString();
-            }  
+            }
         }
 
         // based on https://stackoverflow.com/questions/4739903/shuffle-string-c-sharp

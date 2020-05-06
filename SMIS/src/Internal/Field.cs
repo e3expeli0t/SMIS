@@ -7,14 +7,17 @@ namespace SMISInternal
 {
     class Field
     {
-        public static bool Valid(String value) {
+        public static bool Valid(String value)
+        {
             return !String.IsNullOrEmpty(value);
         }
 
-        public static bool Valid(params String[] values) {
+        public static bool Valid(params String[] values)
+        {
             bool valid = true;
 
-            foreach (string value in values) {
+            foreach (string value in values)
+            {
                 valid = valid && Valid(value);
             }
 

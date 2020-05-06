@@ -11,7 +11,7 @@ using System.Text;
 namespace SMIS.DBControl
 {
 
-    interface DBElement <T, R>
+    interface DBElement<T, R>
     {
         bool exist(T elem);
         R lookup(T elem);

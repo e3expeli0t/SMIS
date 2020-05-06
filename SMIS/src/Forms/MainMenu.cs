@@ -22,7 +22,7 @@ namespace SMIS
 
         public MainMenu()
         {
-           
+
             InitializeComponent();
         }
 

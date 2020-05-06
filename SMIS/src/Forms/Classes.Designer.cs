@@ -29,13 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.ClassesView = new System.Windows.Forms.DataGridView();
-            this.classNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.teacherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gradeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.classesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.SmisDataSet = new SMIS.SMISDBDataSet();
-            this.classesTableAdapter = new SMIS.SMISDBDataSetTableAdapters.ClassesTableAdapter();
             this.Add = new System.Windows.Forms.Button();
             this.Remove = new System.Windows.Forms.Button();
             this.Edit = new System.Windows.Forms.Button();
@@ -47,57 +40,19 @@
             this.Grade = new System.Windows.Forms.TextBox();
             this.Search = new System.Windows.Forms.TextBox();
             this.DoSearch = new System.Windows.Forms.Button();
+            this.ClassesView = new System.Windows.Forms.DataGridView();
+            this.classNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teacherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gradeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.classesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.smisDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.smisDataSet = new SMIS.SmisDataSet();
+            this.classesTableAdapter = new SMIS.SmisDataSetTableAdapters.ClassesTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.ClassesView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SmisDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ClassesView
-            // 
-            this.ClassesView.AutoGenerateColumns = false;
-            this.ClassesView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ClassesView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.classNameDataGridViewTextBoxColumn,
-            this.teacherDataGridViewTextBoxColumn,
-            this.gradeDataGridViewTextBoxColumn});
-            this.ClassesView.DataSource = this.classesBindingSource;
-            this.ClassesView.Location = new System.Drawing.Point(12, 12);
-            this.ClassesView.Name = "ClassesView";
-            this.ClassesView.Size = new System.Drawing.Size(344, 161);
-            this.ClassesView.TabIndex = 0;
-            this.ClassesView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClassesView_CellClick);
-            // 
-            // classNameDataGridViewTextBoxColumn
-            // 
-            this.classNameDataGridViewTextBoxColumn.DataPropertyName = "ClassName";
-            this.classNameDataGridViewTextBoxColumn.HeaderText = "ClassName";
-            this.classNameDataGridViewTextBoxColumn.Name = "classNameDataGridViewTextBoxColumn";
-            // 
-            // teacherDataGridViewTextBoxColumn
-            // 
-            this.teacherDataGridViewTextBoxColumn.DataPropertyName = "Teacher";
-            this.teacherDataGridViewTextBoxColumn.HeaderText = "Teacher";
-            this.teacherDataGridViewTextBoxColumn.Name = "teacherDataGridViewTextBoxColumn";
-            // 
-            // gradeDataGridViewTextBoxColumn
-            // 
-            this.gradeDataGridViewTextBoxColumn.DataPropertyName = "Grade";
-            this.gradeDataGridViewTextBoxColumn.HeaderText = "Grade";
-            this.gradeDataGridViewTextBoxColumn.Name = "gradeDataGridViewTextBoxColumn";
-            // 
-            // classesBindingSource
-            // 
-            this.classesBindingSource.DataMember = "Classes";
-            this.classesBindingSource.DataSource = this.SmisDataSet;
-            // 
-            // SmisDataSet
-            // 
-            this.SmisDataSet.DataSetName = "SMISDBDataSet";
-            this.SmisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // classesTableAdapter
-            // 
-            this.classesTableAdapter.ClearBeforeFill = true;
             // 
             // Add
             // 
@@ -183,6 +138,7 @@
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(100, 20);
             this.Search.TabIndex = 11;
+            this.Search.TextChanged += new System.EventHandler(this.Search_TextChanged);
             // 
             // DoSearch
             // 
@@ -194,11 +150,63 @@
             this.DoSearch.UseVisualStyleBackColor = true;
             this.DoSearch.Click += new System.EventHandler(this.DoSearch_Click);
             // 
+            // ClassesView
+            // 
+            this.ClassesView.AutoGenerateColumns = false;
+            this.ClassesView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ClassesView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.classNameDataGridViewTextBoxColumn,
+            this.teacherDataGridViewTextBoxColumn,
+            this.gradeDataGridViewTextBoxColumn});
+            this.ClassesView.DataSource = this.classesBindingSource;
+            this.ClassesView.Location = new System.Drawing.Point(12, 31);
+            this.ClassesView.Name = "ClassesView";
+            this.ClassesView.Size = new System.Drawing.Size(344, 141);
+            this.ClassesView.TabIndex = 13;
+            // 
+            // classNameDataGridViewTextBoxColumn
+            // 
+            this.classNameDataGridViewTextBoxColumn.DataPropertyName = "ClassName";
+            this.classNameDataGridViewTextBoxColumn.HeaderText = "ClassName";
+            this.classNameDataGridViewTextBoxColumn.Name = "classNameDataGridViewTextBoxColumn";
+            // 
+            // teacherDataGridViewTextBoxColumn
+            // 
+            this.teacherDataGridViewTextBoxColumn.DataPropertyName = "Teacher";
+            this.teacherDataGridViewTextBoxColumn.HeaderText = "Teacher";
+            this.teacherDataGridViewTextBoxColumn.Name = "teacherDataGridViewTextBoxColumn";
+            // 
+            // gradeDataGridViewTextBoxColumn
+            // 
+            this.gradeDataGridViewTextBoxColumn.DataPropertyName = "Grade";
+            this.gradeDataGridViewTextBoxColumn.HeaderText = "Grade";
+            this.gradeDataGridViewTextBoxColumn.Name = "gradeDataGridViewTextBoxColumn";
+            // 
+            // classesBindingSource
+            // 
+            this.classesBindingSource.DataMember = "Classes";
+            this.classesBindingSource.DataSource = this.smisDataSetBindingSource;
+            // 
+            // smisDataSetBindingSource
+            // 
+            this.smisDataSetBindingSource.DataSource = this.smisDataSet;
+            this.smisDataSetBindingSource.Position = 0;
+            // 
+            // smisDataSet
+            // 
+            this.smisDataSet.DataSetName = "SmisDataSet";
+            this.smisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // classesTableAdapter
+            // 
+            this.classesTableAdapter.ClearBeforeFill = true;
+            // 
             // Classes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 376);
+            this.Controls.Add(this.ClassesView);
             this.Controls.Add(this.DoSearch);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.label3);
@@ -210,13 +218,13 @@
             this.Controls.Add(this.Edit);
             this.Controls.Add(this.Remove);
             this.Controls.Add(this.Add);
-            this.Controls.Add(this.ClassesView);
             this.Name = "Classes";
             this.Text = "Classes";
             this.Load += new System.EventHandler(this.Classes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ClassesView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.classesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SmisDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,13 +232,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView ClassesView;
-        private SMISDBDataSet SmisDataSet;
-        private System.Windows.Forms.BindingSource classesBindingSource;
-        private SMISDBDataSetTableAdapters.ClassesTableAdapter classesTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn classNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn teacherDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gradeDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button Add;
         private System.Windows.Forms.Button Remove;
         private System.Windows.Forms.Button Edit;
@@ -242,5 +243,13 @@
         private System.Windows.Forms.TextBox Grade;
         private System.Windows.Forms.TextBox Search;
         private System.Windows.Forms.Button DoSearch;
+        private System.Windows.Forms.DataGridView ClassesView;
+        private System.Windows.Forms.BindingSource smisDataSetBindingSource;
+        private SmisDataSet smisDataSet;
+        private System.Windows.Forms.BindingSource classesBindingSource;
+        private SmisDataSetTableAdapters.ClassesTableAdapter classesTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn classNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn teacherDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gradeDataGridViewTextBoxColumn;
     }
 }

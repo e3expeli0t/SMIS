@@ -39,31 +39,27 @@
             this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hoursDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.teachersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.SmisDataSet = new SMIS.SMISDBDataSet();
-            this.teachersTableAdapter = new SMIS.SMISDBDataSetTableAdapters.TeachersTableAdapter();
-            this.teachersGroupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.smisDataSet = new SMIS.SmisDataSet();
             this.label1 = new System.Windows.Forms.Label();
             this.TeacherName = new System.Windows.Forms.TextBox();
             this.PhoneNumber = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Address = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.Helper = new System.Windows.Forms.HelpProvider();
             this.AddHour = new System.Windows.Forms.Button();
             this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.DoEdit = new System.Windows.Forms.Button();
             this.DoDelete = new System.Windows.Forms.Button();
+            this.teachersTableAdapter = new SMIS.SmisDataSetTableAdapters.TeachersTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.TeachersView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SmisDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teachersGroupsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // DoSave
             // 
-            this.DoSave.Location = new System.Drawing.Point(438, 460);
+            this.DoSave.Location = new System.Drawing.Point(350, 456);
             this.DoSave.Name = "DoSave";
             this.DoSave.Size = new System.Drawing.Size(101, 32);
             this.DoSave.TabIndex = 0;
@@ -89,6 +85,7 @@
             this.TeachersView.Name = "TeachersView";
             this.TeachersView.Size = new System.Drawing.Size(743, 275);
             this.TeachersView.TabIndex = 1;
+            this.TeachersView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TeachersView_CellClick);
             // 
             // teacherIDDataGridViewTextBoxColumn
             // 
@@ -135,21 +132,12 @@
             // teachersBindingSource
             // 
             this.teachersBindingSource.DataMember = "Teachers";
-            this.teachersBindingSource.DataSource = this.SmisDataSet;
+            this.teachersBindingSource.DataSource = this.smisDataSet;
             // 
-            // SmisDataSet
+            // smisDataSet
             // 
-            this.SmisDataSet.DataSetName = "SMISDBDataSet";
-            this.SmisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // teachersTableAdapter
-            // 
-            this.teachersTableAdapter.ClearBeforeFill = true;
-            // 
-            // teachersGroupsBindingSource
-            // 
-            this.teachersGroupsBindingSource.DataMember = "TeachersGroups";
-            this.teachersGroupsBindingSource.DataSource = this.teachersBindingSource;
+            this.smisDataSet.DataSetName = "SmisDataSet";
+            this.smisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label1
             // 
@@ -243,23 +231,19 @@
             this.button1.Text = "Quick serach";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // DoEdit
-            // 
-            this.DoEdit.Location = new System.Drawing.Point(316, 460);
-            this.DoEdit.Name = "DoEdit";
-            this.DoEdit.Size = new System.Drawing.Size(101, 32);
-            this.DoEdit.TabIndex = 14;
-            this.DoEdit.Text = "Edit";
-            this.DoEdit.UseVisualStyleBackColor = true;
-            // 
             // DoDelete
             // 
-            this.DoDelete.Location = new System.Drawing.Point(571, 460);
+            this.DoDelete.Location = new System.Drawing.Point(483, 456);
             this.DoDelete.Name = "DoDelete";
             this.DoDelete.Size = new System.Drawing.Size(101, 32);
             this.DoDelete.TabIndex = 15;
             this.DoDelete.Text = "Delete";
             this.DoDelete.UseVisualStyleBackColor = true;
+            this.DoDelete.Click += new System.EventHandler(this.DoDelete_Click);
+            // 
+            // teachersTableAdapter
+            // 
+            this.teachersTableAdapter.ClearBeforeFill = true;
             // 
             // Teachers
             // 
@@ -268,7 +252,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 517);
             this.Controls.Add(this.DoDelete);
-            this.Controls.Add(this.DoEdit);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.AddHour);
@@ -286,8 +269,7 @@
             this.Load += new System.EventHandler(this.Teachers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TeachersView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SmisDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.teachersGroupsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,10 +279,20 @@
 
         private System.Windows.Forms.Button DoSave;
         private System.Windows.Forms.DataGridView TeachersView;
-        private SMISDBDataSet SmisDataSet;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TeacherName;
+        private System.Windows.Forms.TextBox PhoneNumber;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox Address;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button AddHour;
+        private System.Windows.Forms.DateTimePicker TimePicker;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DoDelete;
+        private SmisDataSet smisDataSet;
         private System.Windows.Forms.BindingSource teachersBindingSource;
-        private SMISDBDataSetTableAdapters.TeachersTableAdapter teachersTableAdapter;
-        private System.Windows.Forms.BindingSource teachersGroupsBindingSource;
+        private SmisDataSetTableAdapters.TeachersTableAdapter teachersTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn teacherIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
@@ -308,18 +300,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn userTypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hoursDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox TeacherName;
-        private System.Windows.Forms.TextBox PhoneNumber;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox Address;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.HelpProvider Helper;
-        private System.Windows.Forms.Button AddHour;
-        private System.Windows.Forms.DateTimePicker TimePicker;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button DoEdit;
-        private System.Windows.Forms.Button DoDelete;
     }
 }

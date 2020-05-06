@@ -32,20 +32,22 @@ namespace SMIS
 
         private void Classes_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'smisDataSet.Classes' table. You can move, or remove it, as needed.
+            this.classesTableAdapter.Fill(this.smisDataSet.Classes);
             // TODO: This line of code loads data into the 'SmisDataSet.Classes' table. You can move, or remove it, as needed.
-            this.classesTableAdapter.Fill(this.SmisDataSet.Classes);
+            this.classesTableAdapter.Fill(this.smisDataSet.Classes);
         }
 
 
-        private bool EditRow(String name, String teacher, String grade) 
+        private bool EditRow(String name, String teacher, String grade)
         {
 
             int index = this.ClassesView.CurrentRow.Index;
             try
             {
-                this.SmisDataSet.Classes.Rows[index][CLASS_NAME] = name;
-                this.SmisDataSet.Classes.Rows[index][TEACHER_NAME] = teacher;
-                this.SmisDataSet.Classes.Rows[index][GRADE] = grade;
+                this.smisDataSet.Classes.Rows[index][CLASS_NAME] = name;
+                this.smisDataSet.Classes.Rows[index][TEACHER_NAME] = teacher;
+                this.smisDataSet.Classes.Rows[index][GRADE] = grade;
             }
             catch (Exception e)
             {
@@ -59,9 +61,9 @@ namespace SMIS
         private void fillFromRow()
         {
             int index = this.ClassesView.CurrentRow.Index;
-            this.ClassName.Text = this.SmisDataSet.Classes.Rows[index][CLASS_NAME].ToString();
-            this.TeacherName.Text = this.SmisDataSet.Classes.Rows[index][TEACHER_NAME].ToString();
-            this.Grade.Text = this.SmisDataSet.Classes.Rows[index][GRADE].ToString();
+            this.ClassName.Text = this.smisDataSet.Classes.Rows[index][CLASS_NAME].ToString();
+            this.TeacherName.Text = this.smisDataSet.Classes.Rows[index][TEACHER_NAME].ToString();
+            this.Grade.Text = this.smisDataSet.Classes.Rows[index][GRADE].ToString();
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -83,14 +85,15 @@ namespace SMIS
 
             try
             {
-                this.SmisDataSet.Classes.AddClassesRow(this.ClassName.Text, this.TeacherName.Text, this.Grade.Text);
+                this.smisDataSet.Classes.AddClassesRow(this.ClassName.Text, this.TeacherName.Text, this.Grade.Text);
             }
-            catch (ConstraintException ex) {
+            catch (ConstraintException ex)
+            {
                 Errors.DisplayMinor("Class name must be uniuqe");
                 return;
-            } 
-                
-            this.classesTableAdapter.Update(this.SmisDataSet.Classes);
+            }
+
+            this.classesTableAdapter.Update(this.smisDataSet.Classes);
         }
 
         private void ClassesView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -100,7 +103,8 @@ namespace SMIS
                 this.fillFromRow();
                 this.Edit.Visible = true;
             }
-            catch (IndexOutOfRangeException ex) {
+            catch (IndexOutOfRangeException ex)
+            {
                 Errors.HandleException(ex);
             }
         }
@@ -130,17 +134,26 @@ namespace SMIS
             throw new NotImplementedException();
         }
 
-        private void DoSearch_Click(object sender, EventArgs e)
+        private void search()
         {
             if (Field.Valid(this.Search.Text))
             {
                 this.classesBindingSource.Filter = String.Format("ClassName like '{0}'", this.Search.Text);
             }
-            else {
-
+            else
+            {
                 this.classesBindingSource.Filter = "ClassName like '*'";
             }
         }
 
+        private void DoSearch_Click(object sender, EventArgs e)
+        {
+            this.search();
+        }
+
+        private void Search_TextChanged(object sender, EventArgs e)
+        {
+            this.search();
+        }
     }
 }

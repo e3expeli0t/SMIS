@@ -24,6 +24,7 @@ namespace SMISInternal
         {
             Console.Beep(); // tmp only for developmant 
             Console.WriteLine("Execption handled: ", e.Data);
+            //DisplayMajor(e.Data.ToString());
         }
     }
 }
