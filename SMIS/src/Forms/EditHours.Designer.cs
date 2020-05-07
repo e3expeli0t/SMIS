@@ -67,10 +67,11 @@
             // 
             // TimeList
             // 
+            this.TimeList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TimeList.FormattingEnabled = true;
             this.TimeList.Location = new System.Drawing.Point(80, 100);
             this.TimeList.Name = "TimeList";
-            this.TimeList.Size = new System.Drawing.Size(120, 95);
+            this.TimeList.Size = new System.Drawing.Size(120, 93);
             this.TimeList.TabIndex = 14;
             // 
             // EditHours

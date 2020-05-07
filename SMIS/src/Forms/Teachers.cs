@@ -46,7 +46,7 @@ namespace SMIS
 
 
         //------------------------------------------------------------------------------------------------------------
-        //SBElement interface functions 
+        //DBElement interface functions 
 
 
 
@@ -72,14 +72,9 @@ namespace SMIS
                 return null;
             }
 
-            String hrs = "$";
-
-            foreach (String hour in this.hours)
-            {
-                hrs += hour + "$";
-            }
-
+            String hrs = Time.generateTime(this.hours);
             this.hlist = hrs;
+            
 
             return hrs;
         }
@@ -124,22 +119,6 @@ namespace SMIS
 
         private void DoSave_Click(object sender, EventArgs e)
         {
-            //if the flag EditMode is set Save acts like The edit buuton =
-            //the implementation is not pretty but this makes the UI look cleaner
-            if (EditMode)
-            {
-                cancelEdit();
-                Dictionary<string, string> names = this.parseName();
-
-                if (names == null)
-                {
-                    return;
-                }
-
-                this.EditRow(names["first_name"], names["last_name"], this.PhoneNumber.Text, Address.Text);
-                return;
-            }
-
             if (!Field.Valid(this.TeacherName.Text, this.PhoneNumber.Text, this.Address.Text))
             {
                 Errors.DisplayMinor("One or more input fields are empty");
@@ -172,8 +151,11 @@ namespace SMIS
             if (EditMode)
             {
                 EditHours eh = new EditHours(this.hlist);
-                eh.Show();
-                this.hlist = eh.GetHours();
+ 
+                if (eh.Good()) {
+                    eh.Show();
+                    this.hlist = eh.GetHours();
+                }
             }
             else
             {
@@ -185,19 +167,33 @@ namespace SMIS
         {
             this.EditMode = true;
             this.AddHour.Text = "Edit time";
-            this.DoDelete.Text = "Cancel";
-            this.DoSave.Text = "Edit";
+            this.DoEdit.Visible = true;
+            this.DoCancel.Visible = true;
             this.fillFromRow();
         }
 
         private void DoDelete_Click(object sender, EventArgs e)
         {
-            if (EditMode)
+            Errors.DisplayMajor("Can't remove item");
+        }
+
+        private void DoEdit_Click(object sender, EventArgs e)
+        {
+            cancelEdit();
+            Dictionary<string, string> names = this.parseName();
+
+            if (names == null)
             {
-                cancelEdit();
                 return;
             }
-            Errors.DisplayMajor("Can't remove item");
+
+            this.EditRow(names["first_name"], names["last_name"], this.PhoneNumber.Text, Address.Text);
+            return;
+        }
+
+        private void DoCancel_Click(object sender, EventArgs e)
+        {
+            this.cancelEdit();
         }
 
         //--------------------------------------------------------------------------------------------------------------------
@@ -207,9 +203,9 @@ namespace SMIS
         private void cancelEdit()
         {
             this.EditMode = false;
+            this.DoEdit.Visible = false;
+            this.DoCancel.Visible = false;
             this.AddHour.Text = "Add time";
-            this.DoSave.Text = "Save";
-            this.DoDelete.Text = "Delete";
         }
 
         private bool EditRow(String fname, String lname, String phone, String addrs)

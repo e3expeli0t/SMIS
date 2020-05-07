@@ -52,6 +52,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.DoDelete = new System.Windows.Forms.Button();
             this.teachersTableAdapter = new SMIS.SmisDataSetTableAdapters.TeachersTableAdapter();
+            this.DoEdit = new System.Windows.Forms.Button();
+            this.DoCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TeachersView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
@@ -59,7 +61,7 @@
             // 
             // DoSave
             // 
-            this.DoSave.Location = new System.Drawing.Point(350, 456);
+            this.DoSave.Location = new System.Drawing.Point(370, 444);
             this.DoSave.Name = "DoSave";
             this.DoSave.Size = new System.Drawing.Size(101, 32);
             this.DoSave.TabIndex = 0;
@@ -194,7 +196,7 @@
             // 
             // AddHour
             // 
-            this.AddHour.Location = new System.Drawing.Point(366, 405);
+            this.AddHour.Location = new System.Drawing.Point(383, 403);
             this.AddHour.Name = "AddHour";
             this.AddHour.Size = new System.Drawing.Size(59, 26);
             this.AddHour.TabIndex = 10;
@@ -206,7 +208,7 @@
             // 
             this.TimePicker.CalendarFont = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.TimePicker.Location = new System.Drawing.Point(438, 405);
+            this.TimePicker.Location = new System.Drawing.Point(455, 403);
             this.TimePicker.MaxDate = new System.DateTime(2225, 12, 31, 0, 0, 0, 0);
             this.TimePicker.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.TimePicker.Name = "TimePicker";
@@ -233,7 +235,8 @@
             // 
             // DoDelete
             // 
-            this.DoDelete.Location = new System.Drawing.Point(483, 456);
+            this.DoDelete.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.DoDelete.Location = new System.Drawing.Point(487, 444);
             this.DoDelete.Name = "DoDelete";
             this.DoDelete.Size = new System.Drawing.Size(101, 32);
             this.DoDelete.TabIndex = 15;
@@ -245,12 +248,36 @@
             // 
             this.teachersTableAdapter.ClearBeforeFill = true;
             // 
+            // DoEdit
+            // 
+            this.DoEdit.Location = new System.Drawing.Point(251, 444);
+            this.DoEdit.Name = "DoEdit";
+            this.DoEdit.Size = new System.Drawing.Size(101, 32);
+            this.DoEdit.TabIndex = 16;
+            this.DoEdit.Text = "Edit";
+            this.DoEdit.UseVisualStyleBackColor = true;
+            this.DoEdit.Visible = false;
+            this.DoEdit.Click += new System.EventHandler(this.DoEdit_Click);
+            // 
+            // DoCancel
+            // 
+            this.DoCancel.Location = new System.Drawing.Point(607, 444);
+            this.DoCancel.Name = "DoCancel";
+            this.DoCancel.Size = new System.Drawing.Size(101, 32);
+            this.DoCancel.TabIndex = 17;
+            this.DoCancel.Text = "Cancel edit";
+            this.DoCancel.UseVisualStyleBackColor = true;
+            this.DoCancel.Visible = false;
+            this.DoCancel.Click += new System.EventHandler(this.DoCancel_Click);
+            // 
             // Teachers
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 517);
+            this.Controls.Add(this.DoCancel);
+            this.Controls.Add(this.DoEdit);
             this.Controls.Add(this.DoDelete);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
@@ -300,5 +327,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn userTypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hoursDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button DoEdit;
+        private System.Windows.Forms.Button DoCancel;
     }
 }
