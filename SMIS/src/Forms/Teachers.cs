@@ -15,7 +15,8 @@ namespace SMIS
 {
     public partial class Teachers : Form
     {
-        private List<String> hours = new List<string>();
+        private List<String> hours = new List<String>();
+
         private String hlist = null;
         private bool EditMode = false;
 
@@ -28,11 +29,8 @@ namespace SMIS
 
         public Teachers(AccessLevel level)
         {
-            if (level != AccessLevel.Admin)
-            {
-                //FIXME: caller must handle this exception
-                throw new UnauthorisedUserExecption("Invalid accsess to teachers dataset");
-            }
+            LevelAsserts.ASSERT_ADMIN_ACCESS(level);
+
             InitializeComponent();
         }
 
@@ -74,7 +72,6 @@ namespace SMIS
 
             String hrs = Time.generateTime(this.hours);
             this.hlist = hrs;
-            
 
             return hrs;
         }
@@ -103,7 +100,7 @@ namespace SMIS
                     firstName += name + " ";
                 }
 
-                firstName = firstName.Take(firstName.Length - 1).ToString();
+                firstName = firstName.Take(firstName.Length - 1).ElementAt(0).ToString();
             }
             Dictionary<string, string> names_dict = new Dictionary<string, string>();
 
@@ -150,10 +147,11 @@ namespace SMIS
         {
             if (EditMode)
             {
+                Asserts.ASSERT(!(this.hlist == null));
                 EditHours eh = new EditHours(this.hlist);
  
                 if (eh.Good()) {
-                    eh.Show();
+                    eh.ShowDialog();
                     this.hlist = eh.GetHours();
                 }
             }
@@ -217,6 +215,7 @@ namespace SMIS
                 this.smisDataSet.Teachers.Rows[index][LAST_NAME] = lname;
                 this.smisDataSet.Teachers.Rows[index][PHONE] = phone;
                 this.smisDataSet.Teachers.Rows[index][ADDRESS] = addrs;
+                this.smisDataSet.Teachers.Rows[index][HOURES] = Time.generateTime(this.hours);
             }
             catch (Exception e)
             {
@@ -237,6 +236,8 @@ namespace SMIS
                 this.PhoneNumber.Text = this.smisDataSet.Teachers.Rows[index][PHONE].ToString();
                 this.Address.Text = this.smisDataSet.Teachers.Rows[index][ADDRESS].ToString();
 
+
+                this.hlist = this.smisDataSet.Teachers.Rows[index][HOURES].ToString();
             }
             catch (IndexOutOfRangeException e)
             {

@@ -37,7 +37,7 @@
             // 
             // Classes
             // 
-            this.Classes.Location = new System.Drawing.Point(263, 290);
+            this.Classes.Location = new System.Drawing.Point(423, 275);
             this.Classes.Name = "Classes";
             this.Classes.Size = new System.Drawing.Size(138, 49);
             this.Classes.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // Groups
             // 
-            this.Groups.Location = new System.Drawing.Point(437, 388);
+            this.Groups.Location = new System.Drawing.Point(597, 373);
             this.Groups.Name = "Groups";
             this.Groups.Size = new System.Drawing.Size(138, 49);
             this.Groups.TabIndex = 1;
@@ -56,16 +56,17 @@
             // 
             // Subjects
             // 
-            this.Subjects.Location = new System.Drawing.Point(598, 290);
+            this.Subjects.Location = new System.Drawing.Point(758, 275);
             this.Subjects.Name = "Subjects";
             this.Subjects.Size = new System.Drawing.Size(138, 49);
             this.Subjects.TabIndex = 2;
             this.Subjects.Text = "Subjects";
             this.Subjects.UseVisualStyleBackColor = true;
+            this.Subjects.Click += new System.EventHandler(this.Subjects_Click);
             // 
             // Teachers
             // 
-            this.Teachers.Location = new System.Drawing.Point(437, 290);
+            this.Teachers.Location = new System.Drawing.Point(597, 275);
             this.Teachers.Name = "Teachers";
             this.Teachers.Size = new System.Drawing.Size(138, 49);
             this.Teachers.TabIndex = 3;
@@ -75,7 +76,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(328, 122);
+            this.progressBar1.Location = new System.Drawing.Point(488, 107);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(376, 83);
             this.progressBar1.TabIndex = 4;
@@ -84,7 +85,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1088, 645);
+            this.BackgroundImage = global::SMIS.Properties.Resources.MainMenu_background;
+            this.ClientSize = new System.Drawing.Size(1287, 579);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.Teachers);
             this.Controls.Add(this.Subjects);

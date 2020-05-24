@@ -21,19 +21,13 @@ namespace SMIS
 
         public Classes(AccessLevel level)
         {
-            if (level != AccessLevel.Admin)
-            {
-                //FIXME: caller must handle this exception
-                throw new UnauthorisedUserExecption("Invalid accsess to classes dataset");
-            }
+            LevelAsserts.ASSERT_ADMIN_ACCESS(level);
 
             InitializeComponent();
         }
 
         private void Classes_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'smisDataSet.Classes' table. You can move, or remove it, as needed.
-            this.classesTableAdapter.Fill(this.smisDataSet.Classes);
             // TODO: This line of code loads data into the 'SmisDataSet.Classes' table. You can move, or remove it, as needed.
             this.classesTableAdapter.Fill(this.smisDataSet.Classes);
         }

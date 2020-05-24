@@ -64,6 +64,7 @@
             this.DoRemove.TabIndex = 13;
             this.DoRemove.Text = "Remove time";
             this.DoRemove.UseVisualStyleBackColor = true;
+            this.DoRemove.Click += new System.EventHandler(this.DoRemove_Click);
             // 
             // TimeList
             // 
@@ -73,6 +74,7 @@
             this.TimeList.Name = "TimeList";
             this.TimeList.Size = new System.Drawing.Size(120, 93);
             this.TimeList.TabIndex = 14;
+            this.TimeList.SelectedIndexChanged += new System.EventHandler(this.TimeList_SelectedIndexChanged);
             // 
             // EditHours
             // 

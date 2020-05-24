@@ -14,11 +14,14 @@ namespace SMIS
     {
         private String hours;
         private bool good = true;
+        private int CURRENT = 0;
 
         public EditHours(String currentHours)
         {
             InitializeComponent();
             this.hours = currentHours;
+            this.CURRENT = this.TimeList.SelectedIndex;
+            this.TimePicker.ResetText();
 
             if (!(this.hours == ""))
             {
@@ -34,7 +37,10 @@ namespace SMIS
 
                 foreach (String h in extractTime)
                 {
-                    this.TimeList.Items.Add(h);
+                    if (h != "")
+                    {
+                        this.TimeList.Items.Add(h);
+                    }
                 }
             }
         }
@@ -42,7 +48,7 @@ namespace SMIS
 
         public bool Good()
         {
-           return this.good;
+            return this.good;
         }
 
         public String GetHours()
@@ -52,7 +58,19 @@ namespace SMIS
 
         private void AddHour_Click(object sender, EventArgs e)
         {
+            this.TimeList.Items.Add(this.TimePicker.Text);
+            hours = TimeList.Items.ToString();
+        }
 
+        private void DoRemove_Click(object sender, EventArgs e)
+        {
+            this.TimeList.Items.RemoveAt(this.CURRENT);
+            this.TimeList.Refresh();
+        }
+
+        private void TimeList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.CURRENT = this.TimeList.SelectedIndex;
         }
     }
 }

@@ -5,6 +5,14 @@ using System.Text;
 
 namespace SMISInternal
 {
+
+    /*
+     * Time grammer:
+     *      time_list ::= "$" [time_list] "$" | time
+     *      time      ::=  hour:min:sec
+     *      where hour min and sec are lexemes
+      */
+
     class Time
     {
         public static List<String> extractTime(String time) {
@@ -14,10 +22,7 @@ namespace SMISInternal
                 return null;
             }
 
-            String[] stime = time.Split('$');
-
-            Errors.DisplayMinor(stime.ToString());
-
+            times = time.Split('$').ToList<String>();
             return times;
         }
 

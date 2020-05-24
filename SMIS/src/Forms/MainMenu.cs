@@ -31,8 +31,6 @@ namespace SMIS
 
         }
 
-
-
         //todo: add login support
         private void login()
         {
@@ -45,7 +43,12 @@ namespace SMIS
 
         private void Teachers_Click(object sender, EventArgs e)
         {
-            new Teachers(AdminAccsess).Show();
+            new Teachers(AccessLevel.Admin).Show();
+        }
+
+        private void Subjects_Click(object sender, EventArgs e)
+        {
+            new Subjects(AccessLevel.Admin).ShowDialog();
         }
     }
 }

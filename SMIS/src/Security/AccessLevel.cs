@@ -12,4 +12,20 @@ namespace SMISSecurity
         RegularUser = 0x2,
         Default = 0x2,
     }
+
+    public class LevelAsserts {
+
+        public static void ASSERT_ADMIN_ACCESS(AccessLevel level) {
+            VALID_ACCSES(level, AccessLevel.Admin);
+        }
+        
+        public static void VALID_ACCSES(AccessLevel level, AccessLevel min = AccessLevel.Default)
+        {
+            if (level != min)
+            {
+                //FIXME: caller must handle this exception
+                throw new UnauthorisedUserExecption("Invalid accsess to teachers dataset");
+            }
+        }
+    }
 }
