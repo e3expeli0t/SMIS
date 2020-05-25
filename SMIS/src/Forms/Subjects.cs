@@ -12,6 +12,9 @@ namespace SMIS
 {
     public partial class Subjects : Form
     {
+
+        private int index = 0;
+
         public Subjects(AccessLevel level)
         {
 
@@ -25,5 +28,30 @@ namespace SMIS
 
         }
 
+        private void fillFromRow() {
+            this.Subject.Text = this.smisDataSet.Subjects.Rows[index][1].ToString();
+        }
+
+        private void DoSave_Click(object sender, EventArgs e)
+        {
+            RandomString.SetSeed(this.Subject.Text);
+            String id = RandomString.Generate();
+            this.smisDataSet.Subjects.AddSubjectsRow(id, this.Subject.Text);
+            this.subjectsTableAdapter.Update(this.smisDataSet.Subjects);
+            this.smisDataSet.AcceptChanges();
+        }
+
+        private void DoEdit_Click(object sender, EventArgs e)
+        {
+            this.smisDataSet.Subjects.Rows[index][1] = this.Subject.Text;
+            this.subjectsTableAdapter.Update(this.smisDataSet.Subjects);
+        }
+
+        private void SubjectsView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.DoEdit.Visible = true;
+            index = this.SubjectsView.CurrentRow.Index;
+            this.fillFromRow();
+        }
     }
 }

@@ -88,6 +88,8 @@ namespace SMIS
             }
 
             this.classesTableAdapter.Update(this.smisDataSet.Classes);
+
+            this.smisDataSet.AcceptChanges();
         }
 
         private void ClassesView_CellClick(object sender, DataGridViewCellEventArgs e)

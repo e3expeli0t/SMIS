@@ -29,34 +29,37 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.SubjectsView = new System.Windows.Forms.DataGridView();
             this.lIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subjectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.smisDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.smisDataSet = new SMIS.SmisDataSet();
             this.subjectsTableAdapter = new SMIS.SmisDataSetTableAdapters.SubjectsTableAdapter();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.DoSave = new System.Windows.Forms.Button();
+            this.DoEdit = new System.Windows.Forms.Button();
+            this.Subject = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.SubjectsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // SubjectsView
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SubjectsView.AutoGenerateColumns = false;
+            this.SubjectsView.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.SubjectsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.SubjectsView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.lIDDataGridViewTextBoxColumn,
             this.lNameDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.subjectsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(238, 77);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(245, 132);
-            this.dataGridView1.TabIndex = 1;
+            this.SubjectsView.DataSource = this.subjectsBindingSource;
+            this.SubjectsView.Location = new System.Drawing.Point(37, 12);
+            this.SubjectsView.Name = "SubjectsView";
+            this.SubjectsView.Size = new System.Drawing.Size(245, 132);
+            this.SubjectsView.TabIndex = 1;
+            this.SubjectsView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SubjectsView_CellContentClick);
             // 
             // lIDDataGridViewTextBoxColumn
             // 
@@ -89,50 +92,81 @@
             // 
             this.subjectsTableAdapter.ClearBeforeFill = true;
             // 
-            // imageList1
+            // DoSave
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.DoSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DoSave.Location = new System.Drawing.Point(64, 208);
+            this.DoSave.Name = "DoSave";
+            this.DoSave.Size = new System.Drawing.Size(93, 33);
+            this.DoSave.TabIndex = 2;
+            this.DoSave.Text = "Save";
+            this.DoSave.UseVisualStyleBackColor = true;
+            this.DoSave.Click += new System.EventHandler(this.DoSave_Click);
             // 
-            // pictureBox1
+            // DoEdit
             // 
-            this.pictureBox1.Image = global::SMIS.Properties.Resources.Background;
-            this.pictureBox1.Location = new System.Drawing.Point(1, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(750, 420);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.DoEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DoEdit.Location = new System.Drawing.Point(163, 208);
+            this.DoEdit.Name = "DoEdit";
+            this.DoEdit.Size = new System.Drawing.Size(93, 33);
+            this.DoEdit.TabIndex = 3;
+            this.DoEdit.Text = "Edit";
+            this.DoEdit.UseVisualStyleBackColor = false;
+            this.DoEdit.Visible = false;
+            this.DoEdit.Click += new System.EventHandler(this.DoEdit_Click);
+            // 
+            // Subject
+            // 
+            this.Subject.Location = new System.Drawing.Point(119, 163);
+            this.Subject.Name = "Subject";
+            this.Subject.Size = new System.Drawing.Size(100, 20);
+            this.Subject.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Location = new System.Drawing.Point(78, 163);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Name";
             // 
             // Subjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(748, 418);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.pictureBox1);
+            this.BackgroundImage = global::SMIS.Properties.Resources.Background;
+            this.ClientSize = new System.Drawing.Size(297, 289);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Subject);
+            this.Controls.Add(this.DoEdit);
+            this.Controls.Add(this.DoSave);
+            this.Controls.Add(this.SubjectsView);
             this.Name = "Subjects";
-            this.Text = "f";
+            this.Text = "Subjects";
             this.Load += new System.EventHandler(this.Subjects_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SubjectsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView SubjectsView;
         private System.Windows.Forms.BindingSource smisDataSetBindingSource;
         private SmisDataSet smisDataSet;
         private System.Windows.Forms.BindingSource subjectsBindingSource;
         private SmisDataSetTableAdapters.SubjectsTableAdapter subjectsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn lIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button DoSave;
+        private System.Windows.Forms.Button DoEdit;
+        private System.Windows.Forms.TextBox Subject;
+        private System.Windows.Forms.Label label1;
     }
 }

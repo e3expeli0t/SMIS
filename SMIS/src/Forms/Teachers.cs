@@ -141,6 +141,7 @@ namespace SMIS
 
             this.smisDataSet.Teachers.AddTeachersRow(id, namesDict["first_name"], namesDict["last_name"], this.PhoneNumber.Text,
                 (int)AccessLevel.Default, this.Address.Text, hrs);
+            this.smisDataSet.AcceptChanges();
         }
 
         private void AddHour_Click(object sender, EventArgs e)
