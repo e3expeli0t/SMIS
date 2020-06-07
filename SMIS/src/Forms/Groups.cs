@@ -15,5 +15,12 @@ namespace SMIS
         {
             InitializeComponent();
         }
+
+        private void Groups_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'smisDataSet.Groups' table. You can move, or remove it, as needed.
+            this.groupsTableAdapter.Fill(this.smisDataSet.Groups);
+
+        }
     }
 }

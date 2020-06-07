@@ -50,5 +50,10 @@ namespace SMIS
         {
             new Subjects(AccessLevel.Admin).ShowDialog();
         }
+
+        private void Groups_Click(object sender, EventArgs e)
+        {
+            new Groups().ShowDialog();
+        }
     }
 }

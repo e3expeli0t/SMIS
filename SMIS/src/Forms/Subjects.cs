@@ -17,6 +17,7 @@ namespace SMIS
 
         public Subjects(AccessLevel level)
         {
+            LevelAsserts.ASSERT_ADMIN_ACCESS(level);
 
             InitializeComponent();
         }

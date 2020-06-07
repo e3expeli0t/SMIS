@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SMISSecurity;
+using SMIS.DataBase;
 using SMISInternal;
 
 namespace SMIS
 {
 
-    public partial class Classes : Form, DBControl.DBElement<String, Object>
+    public partial class Classes : Form
     {
 
         const int CLASS_NAME = 0;
@@ -69,11 +70,10 @@ namespace SMIS
             }
 
             //todo: check for valid grade
-            if (!Teachers.exist(this.TeacherName.Text))
+            if (!TeachersDBTable.Exists(TeacherName.Text))
             {
                 SMISInternal.Errors.DisplayMinor(
-                    String.Format("Couldn't find teacher '{0}'", this.TeacherName.Text)
-                    );
+                    String.Format("Couldn't find teacher '{0}'", this.TeacherName.Text));
                 return;
             }
 
@@ -117,28 +117,15 @@ namespace SMIS
                 this.Edit.Visible = false;
             }
         }
-
-
-        //DBElement interface
-        public bool exist(string elem)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object lookup(string elem)
-        {
-            throw new NotImplementedException();
-        }
-
         private void search()
         {
             if (Field.Valid(this.Search.Text))
             {
-                this.classesBindingSource.Filter = String.Format("ClassName like '{0}'", this.Search.Text);
+                this.classesBindingSource.Filter = String.Format("ClassName like % '{0}'", this.Search.Text);
             }
             else
             {
-                this.classesBindingSource.Filter = "ClassName like '*'";
+                this.classesBindingSource.Filter = "ClassName like % ";
             }
         }
 

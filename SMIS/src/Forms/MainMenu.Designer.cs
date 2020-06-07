@@ -53,6 +53,7 @@
             this.Groups.TabIndex = 1;
             this.Groups.Text = "View Groups";
             this.Groups.UseVisualStyleBackColor = true;
+            this.Groups.Click += new System.EventHandler(this.Groups_Click);
             // 
             // Subjects
             // 

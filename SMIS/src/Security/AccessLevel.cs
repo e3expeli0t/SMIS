@@ -24,7 +24,7 @@ namespace SMISSecurity
             if (level != min)
             {
                 //FIXME: caller must handle this exception
-                throw new UnauthorisedUserExecption("Invalid accsess to teachers dataset");
+                throw new UnauthorisedUserExecption("Invalid accsess to Database");
             }
         }
     }

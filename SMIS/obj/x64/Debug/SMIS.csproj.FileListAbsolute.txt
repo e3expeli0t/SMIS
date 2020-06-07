@@ -1,0 +1,2 @@
+C:\Users\תלמיד משתמש\documents\visual studio 2010\Projects\SMIS\SMIS\bin\x64\Debug\SMIS.exe
+C:\Users\תלמיד משתמש\documents\visual studio 2010\Projects\SMIS\SMIS\bin\x64\Debug\SMIS.pdb
