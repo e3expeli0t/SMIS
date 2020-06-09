@@ -20,6 +20,8 @@ namespace SMIS
         const int TEACHER_NAME = 1;
         const int GRADE = 2;
 
+        private Loader basic_loader;
+
         public Classes(AccessLevel level)
         {
             LevelAsserts.ASSERT_ADMIN_ACCESS(level);
@@ -31,6 +33,7 @@ namespace SMIS
         {
             // TODO: This line of code loads data into the 'SmisDataSet.Classes' table. You can move, or remove it, as needed.
             this.classesTableAdapter.Fill(this.smisDataSet.Classes);
+            basic_loader = new Loader(this.smisDataSet);
         }
 
 
@@ -69,13 +72,15 @@ namespace SMIS
                 return;
             }
 
+            Dictionary<String, String> names = this.parseName();
+
             //todo: check for valid grade
-            if (!TeachersDBTable.Exists(TeacherName.Text))
+            if (!this.basic_loader.TeacherExistsSoft(names["first_name"], names["last_name"]))
             {
-                SMISInternal.Errors.DisplayMinor(
-                    String.Format("Couldn't find teacher '{0}'", this.TeacherName.Text));
+                Errors.DisplayMajor(String.Format("Couldn't find teacher named '{}'. please check agian.", this.TeacherName.Text));
                 return;
             }
+
 
             try
             {
@@ -137,6 +142,40 @@ namespace SMIS
         private void Search_TextChanged(object sender, EventArgs e)
         {
             this.search();
+        }
+
+        private Dictionary<String, String> parseName()
+        {
+            String[] names = this.TeacherName.Text.Split(' ', '\t');
+
+            if (names.Length < 2)
+            {
+                Errors.DisplayMinor("Please supply full name.");
+                return null;
+            }
+
+            String firstName = names[0];
+            String lastName = names[1];
+
+            if (names.Length > 2)
+            {
+                lastName = names.LastOrDefault();
+                names = names.Take(names.Length - 1).ToArray();
+
+                firstName = "";
+                foreach (String name in names)
+                {
+                    firstName += name + " ";
+                }
+
+                firstName = firstName.Take(firstName.Length - 1).ElementAt(0).ToString();
+            }
+            Dictionary<string, string> names_dict = new Dictionary<string, string>();
+
+            names_dict.Add("first_name", firstName);
+            names_dict.Add("last_name", lastName);
+
+            return names_dict;
         }
     }
 }

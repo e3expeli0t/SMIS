@@ -9,23 +9,24 @@ namespace SMIS.Schedualer
     {
         private String firstName;
         private String lastName;
+        private String id;
         private DateTime[] preferdTime;
         private Class[] classes;
         private Group[] groups;
 
 
-        public static Teacher Construct(String fname, String lname, DateTime[] preferdTime, Class[] classes, Group[] groups) {
+        public static Teacher Construct(String fname, String lname, String id) {
 
-            return new Teacher(fname, lname, preferdTime, classes, groups);
+            return new Teacher(fname, lname, id);
         }
 
-        public Teacher(String fname, String lname, DateTime[] preferdTime, Class[] classes, Group[] groups)
+        public Teacher(String fname, String lname, String id)
         {
             this.firstName = fname;
             this.lastName = lname;
-            this.preferdTime = preferdTime;
-            this.classes = classes;
-            this.groups = groups;
+            this.preferdTime = null;
+            this.classes = null;
+            this.groups = null;
         }
 
         public String FirstName {

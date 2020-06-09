@@ -6,6 +6,8 @@ using System.Data;
 using System.Diagnostics;
 
 using SMISInternal;
+using SMIS.SmisDataSetTableAdapters;
+
 namespace SMIS.DataBase
 {
     class TeachersDBTable : DBTable<DataRow> {
@@ -15,22 +17,33 @@ namespace SMIS.DataBase
         private const int ADDRESS = 5;
         private const int HOURES = 6;
 
-        public static bool Exists(string name)
-        {
 
-            SmisDataSet ds = new SmisDataSet();
+        private SmisDataSet ds = new SmisDataSet();
+        private TeachersTableAdapter TeachersTA = new TeachersTableAdapter();
+
+        public TeachersDBTable()
+        {
             ds.DataSetName = "SmisDataSet";
             ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
 
-            ds.BeginInit();
-            if (ds.HasChanges()) {
+            this.TeachersTA.Fill(this.ds.Teachers);
+
+            if (ds.HasChanges())
+            {
                 ds.GetChanges();
             }
 
             ds.AcceptChanges();
-            if (ds.Teachers.Rows.Count == 0) {
+
+            if (ds.Teachers.Rows.Count == 0)
+            {
                 Errors.DisplayMinor("Couldn't load teachers Table");
             }
+
+        }
+
+        public bool Exists(string name)
+        {
 
             foreach (DataRow row in ds.Teachers.Rows) {
                 String full_name = row[FIRST_NAME].ToString()+row[LAST_NAME].ToString();

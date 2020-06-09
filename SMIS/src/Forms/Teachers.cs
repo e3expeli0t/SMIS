@@ -10,6 +10,8 @@ using SMIS.DBControl;
 using SMISSecurity;
 using SMISInternal;
 
+using SMIS.DataBase;
+
 
 namespace SMIS
 {
@@ -30,8 +32,9 @@ namespace SMIS
         public Teachers(AccessLevel level)
         {
             LevelAsserts.ASSERT_ADMIN_ACCESS(level);
-
             InitializeComponent();
+
+            
         }
 
 
@@ -40,23 +43,6 @@ namespace SMIS
         {
             // TODO: This line of code loads data into the 'smisDataSet.Teachers' table. You can move, or remove it, as needed.
             this.teachersTableAdapter.Fill(this.smisDataSet.Teachers);
-        }
-
-
-        //------------------------------------------------------------------------------------------------------------
-        //DBElement interface functions 
-
-
-
-        public static bool exist(string elem)
-        {
-            //throw new NotImplementedException();
-            return true;
-        }
-
-        public static object lookup(string elem)
-        {
-            throw new NotImplementedException();
         }
 
 

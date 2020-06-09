@@ -118,7 +118,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SmisDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="src\DataBase\Connections.cs" />
     <Compile Include="src\DataBase\DBTable.cs" />
+    <Compile Include="src\DataBase\Loader.cs" />
     <Compile Include="src\DataBase\TeachersDBTable.cs" />
     <Compile Include="src\Forms\Classes.cs">
       <SubType>Form</SubType>
@@ -157,6 +159,9 @@
     <Compile Include="src\Internal\Time.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Schedualer\Class.cs" />
+    <Compile Include="src\Schedualer\Group.cs" />
+    <Compile Include="src\Schedualer\Teacher.cs" />
     <Compile Include="src\Security\AccessLevel.cs" />
     <Compile Include="src\Security\Login.cs" />
     <Compile Include="src\Security\RandomString.cs" />
