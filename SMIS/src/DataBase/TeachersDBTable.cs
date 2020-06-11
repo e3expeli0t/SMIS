@@ -24,7 +24,7 @@ namespace SMIS.DataBase
         public TeachersDBTable()
         {
             ds.DataSetName = "SmisDataSet";
-            ds.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            ds.SchemaSerializationMode = SchemaSerializationMode.IncludeSchema;
 
             this.TeachersTA.Fill(this.ds.Teachers);
 
@@ -44,9 +44,8 @@ namespace SMIS.DataBase
 
         public bool Exists(string name)
         {
-
             foreach (DataRow row in ds.Teachers.Rows) {
-                String full_name = row[FIRST_NAME].ToString()+row[LAST_NAME].ToString();
+                String full_name = row[FIRST_NAME].ToString()+" "+row[LAST_NAME].ToString();
                 if (row[FIRST_NAME].ToString() == name || row[LAST_NAME].ToString() == name || full_name == name) {
                     return true;
                 }

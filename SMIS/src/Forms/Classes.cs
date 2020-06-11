@@ -20,20 +20,20 @@ namespace SMIS
         const int TEACHER_NAME = 1;
         const int GRADE = 2;
 
-        private Loader basic_loader;
+        private TeachersDBTable tDBTable;
 
         public Classes(AccessLevel level)
         {
             LevelAsserts.ASSERT_ADMIN_ACCESS(level);
 
             InitializeComponent();
+            this.tDBTable = new TeachersDBTable();
         }
 
         private void Classes_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'SmisDataSet.Classes' table. You can move, or remove it, as needed.
             this.classesTableAdapter.Fill(this.smisDataSet.Classes);
-            basic_loader = new Loader(this.smisDataSet);
         }
 
 
@@ -49,7 +49,7 @@ namespace SMIS
             }
             catch (Exception e)
             {
-                SMISInternal.Errors.HandleException(e);
+                Errors.HandleException(e);
                 return false;
             }
 
@@ -74,8 +74,12 @@ namespace SMIS
 
             Dictionary<String, String> names = this.parseName();
 
+            if (Name == null) {
+                return;
+            }
+
             //todo: check for valid grade
-            if (!this.basic_loader.TeacherExistsSoft(names["first_name"], names["last_name"]))
+            if (!this.tDBTable.Exists(names["first_name"]+" "+names["last_name"]))
             {
                 Errors.DisplayMajor(String.Format("Couldn't find teacher named '{}'. please check agian.", this.TeacherName.Text));
                 return;

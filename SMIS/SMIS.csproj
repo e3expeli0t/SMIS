@@ -128,7 +128,6 @@
     <Compile Include="src\Forms\Classes.Designer.cs">
       <DependentUpon>Classes.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\DBElement.cs" />
     <Compile Include="src\Forms\EditHours.cs">
       <SubType>Form</SubType>
     </Compile>

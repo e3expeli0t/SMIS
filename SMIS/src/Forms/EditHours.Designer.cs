@@ -85,8 +85,6 @@
             this.Controls.Add(this.DoRemove);
             this.Controls.Add(this.AddHour);
             this.Controls.Add(this.TimePicker);
-            this.Name = "EditHours";
-            this.Text = "EditHours";
             this.ResumeLayout(false);
 
         }
