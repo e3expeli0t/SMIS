@@ -226,6 +226,9 @@
     <EmbeddedResource Include="src\Forms\Teachers.resx">
       <DependentUpon>Teachers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\Forms\TecherTime.resx">
+      <DependentUpon>TecherTime.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

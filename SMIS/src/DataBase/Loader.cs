@@ -94,6 +94,24 @@ namespace SMIS.DataBase
             return teachers.ToArray();
         }
 
+        public static SmisDataSet.TeachersRow GetTeacherRow(String id) {
+            SmisDataSet ds = new SmisDataSet();
+            TeachersTableAdapter teachers_table = new TeachersTableAdapter();
+
+            teachers_table.Fill(ds.Teachers);
+            if (ds.Teachers.Any())
+            {
+                Errors.DisplayMajor("Database didn't load properly.\nOr there is no teachers to load, please try reloading the application or adding teachers");
+            }
+
+            foreach (SmisDataSet.TeachersRow r in ds.Teachers.Rows) {
+                if (r.TeacherID == id) {
+                    return r;
+                }
+            }
+
+            return null;
+        }
 
         //Todo: This shoud handle only ID
         public Teacher GetTeacherByName(String name) {
@@ -105,10 +123,11 @@ namespace SMIS.DataBase
 
             foreach (DataRow row in this.smisDataSet.Teachers.Rows) {
                 if (row[FIRST_NAME].ToString() + " " + row[LAST_NAME].ToString() == name) {
-                    teacher = Teacher.Construct(
-                        )
+                    Asserts.ASSERT_NOT_REACHED();
                 }
             }
+
+            return null;
         }
 
         public bool TeacherExistsStrong(String id = "") {
@@ -133,85 +152,12 @@ namespace SMIS.DataBase
             List<Classes> teachers = new List<Classes>();
             foreach (DataRow dr in this.smisDataSet.Teachers.Rows)
             {
-                teachers.Add(
-                         Class.Construct(dr[TEACHER].ToString(), dr[GRADE].ToString() , dr[NAME].ToString())
-                    );
+                Asserts.ASSERT_NOT_REACHED();
             }
 
             Asserts.ASSERT(teachers.Any());
 
-            return teachers.ToArray();
-        }
-
-        public bool TeacherExistsStrong(String id = "")
-        {
-            Asserts.ASSERT(id.Any(), "Can't search for empty id");
-
-            foreach (DataRow dr in this.smisDataSet.Teachers.Rows)
-            {
-                if (dr[0].ToString() == id)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool TeacherExistsSoft(String fname, String lname)
-        {
-            Asserts.ASSERT(fname.Any() && lname.Any(), "Can't search for empty name");
-            int FIRST_NAME = 1;
-            int LAST_NAME = 2;
-
-
-            Debug.WriteLine(fname, lname);
-
-            foreach (DataRow dr in this.smisDataSet.Teachers.Rows)
-            {
-                if (dr[FIRST_NAME].ToString() == fname.Trim() && dr[LAST_NAME].ToString() == lname.Trim())
-                {
-                    return true;
-                }
-            }
-
-            Asserts.ASSERT_NOT_REACHED();
-
-            return false;
-        }
-
-
-        public Teacher[] GetTeachers()
-        {
-            int FIRST_NAME = 1;
-            int LAST_NAME = 2;
-
-            List<Teacher> teachers = new List<Teacher>();
-            foreach (DataRow dr in this.smisDataSet.Teachers.Rows)
-            {
-                teachers.Add(
-                         Teacher.Construct(dr[FIRST_NAME].ToString(), dr[LAST_NAME].ToString(), dr[0].ToString())
-                    );
-            }
-
-            Asserts.ASSERT(teachers.Any());
-
-            return teachers.ToArray();
-        }
-
-        public bool TeacherExistsStrong(String id = "")
-        {
-            Asserts.ASSERT(id.Any(), "Can't search for empty id");
-
-            foreach (DataRow dr in this.smisDataSet.Teachers.Rows)
-            {
-                if (dr[0].ToString() == id)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return null;
         }
 
         public bool TeacherExistsSoft(String fname, String lname)

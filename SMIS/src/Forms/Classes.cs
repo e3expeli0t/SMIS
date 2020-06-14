@@ -130,11 +130,11 @@ namespace SMIS
         {
             if (Field.Valid(this.Search.Text))
             {
-                this.classesBindingSource.Filter = String.Format("ClassName like % '{0}'", this.Search.Text);
+                this.classesBindingSource.Filter = String.Format("ClassName='{0}'", this.Search.Text);
             }
             else
             {
-                this.classesBindingSource.Filter = "ClassName like % ";
+                this.classesBindingSource.Filter = "ClassName='' ";
             }
         }
 

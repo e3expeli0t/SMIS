@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.DoSave = new System.Windows.Forms.Button();
+            this.DoNew = new System.Windows.Forms.Button();
             this.TeachersView = new System.Windows.Forms.DataGridView();
             this.teacherIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,28 +46,28 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Address = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.AddHour = new System.Windows.Forms.Button();
-            this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.DoDelete = new System.Windows.Forms.Button();
             this.teachersTableAdapter = new SMIS.SmisDataSetTableAdapters.TeachersTableAdapter();
             this.DoEdit = new System.Windows.Forms.Button();
             this.DoCancel = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TeachersView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
             this.SuspendLayout();
             // 
-            // DoSave
+            // DoNew
             // 
-            this.DoSave.Location = new System.Drawing.Point(370, 444);
-            this.DoSave.Name = "DoSave";
-            this.DoSave.Size = new System.Drawing.Size(101, 32);
-            this.DoSave.TabIndex = 0;
-            this.DoSave.Text = "Save";
-            this.DoSave.UseVisualStyleBackColor = true;
-            this.DoSave.Click += new System.EventHandler(this.DoSave_Click);
+            this.DoNew.Location = new System.Drawing.Point(370, 444);
+            this.DoNew.Name = "DoNew";
+            this.DoNew.Size = new System.Drawing.Size(101, 32);
+            this.DoNew.TabIndex = 0;
+            this.DoNew.Text = "New";
+            this.DoNew.UseVisualStyleBackColor = true;
+            this.DoNew.Click += new System.EventHandler(this.DoSave_Click);
             // 
             // TeachersView
             // 
@@ -146,7 +146,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label1.Location = new System.Drawing.Point(380, 302);
+            this.label1.Location = new System.Drawing.Point(265, 295);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 2;
@@ -155,7 +155,7 @@
             // TeacherName
             // 
             this.TeacherName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TeacherName.Location = new System.Drawing.Point(438, 299);
+            this.TeacherName.Location = new System.Drawing.Point(323, 292);
             this.TeacherName.Name = "TeacherName";
             this.TeacherName.Size = new System.Drawing.Size(117, 20);
             this.TeacherName.TabIndex = 3;
@@ -163,7 +163,7 @@
             // PhoneNumber
             // 
             this.PhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PhoneNumber.Location = new System.Drawing.Point(438, 334);
+            this.PhoneNumber.Location = new System.Drawing.Point(323, 327);
             this.PhoneNumber.Name = "PhoneNumber";
             this.PhoneNumber.Size = new System.Drawing.Size(117, 20);
             this.PhoneNumber.TabIndex = 5;
@@ -171,7 +171,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(380, 337);
+            this.label2.Location = new System.Drawing.Point(265, 330);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 4;
@@ -180,7 +180,7 @@
             // Address
             // 
             this.Address.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Address.Location = new System.Drawing.Point(438, 370);
+            this.Address.Location = new System.Drawing.Point(323, 363);
             this.Address.Name = "Address";
             this.Address.Size = new System.Drawing.Size(117, 20);
             this.Address.TabIndex = 7;
@@ -188,33 +188,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(380, 373);
+            this.label3.Location = new System.Drawing.Point(265, 366);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Address";
-            // 
-            // AddHour
-            // 
-            this.AddHour.Location = new System.Drawing.Point(383, 403);
-            this.AddHour.Name = "AddHour";
-            this.AddHour.Size = new System.Drawing.Size(59, 26);
-            this.AddHour.TabIndex = 10;
-            this.AddHour.Text = "Add time";
-            this.AddHour.UseVisualStyleBackColor = true;
-            this.AddHour.Click += new System.EventHandler(this.AddHour_Click);
-            // 
-            // TimePicker
-            // 
-            this.TimePicker.CalendarFont = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.TimePicker.Location = new System.Drawing.Point(455, 403);
-            this.TimePicker.MaxDate = new System.DateTime(2225, 12, 31, 0, 0, 0, 0);
-            this.TimePicker.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.TimePicker.Name = "TimePicker";
-            this.TimePicker.Size = new System.Drawing.Size(117, 20);
-            this.TimePicker.TabIndex = 9;
-            this.TimePicker.Value = new System.DateTime(2020, 5, 5, 16, 12, 56, 0);
             // 
             // textBox1
             // 
@@ -270,19 +248,36 @@
             this.DoCancel.Visible = false;
             this.DoCancel.Click += new System.EventHandler(this.DoCancel_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox2.Location = new System.Drawing.Point(531, 295);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(117, 20);
+            this.textBox2.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(457, 297);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Total Time";
+            // 
             // Teachers
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 517);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.DoCancel);
             this.Controls.Add(this.DoEdit);
             this.Controls.Add(this.DoDelete);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.AddHour);
-            this.Controls.Add(this.TimePicker);
             this.Controls.Add(this.Address);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.PhoneNumber);
@@ -290,7 +285,7 @@
             this.Controls.Add(this.TeacherName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TeachersView);
-            this.Controls.Add(this.DoSave);
+            this.Controls.Add(this.DoNew);
             this.Name = "Teachers";
             this.Text = "Teachers";
             this.Load += new System.EventHandler(this.Teachers_Load);
@@ -304,7 +299,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button DoSave;
+        private System.Windows.Forms.Button DoNew;
         private System.Windows.Forms.DataGridView TeachersView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox TeacherName;
@@ -312,8 +307,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox Address;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button AddHour;
-        private System.Windows.Forms.DateTimePicker TimePicker;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button DoDelete;
@@ -329,5 +322,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn hoursDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button DoEdit;
         private System.Windows.Forms.Button DoCancel;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
     }
 }

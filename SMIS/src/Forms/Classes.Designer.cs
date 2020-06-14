@@ -152,6 +152,8 @@
             // 
             // ClassesView
             // 
+            this.ClassesView.AllowUserToAddRows = false;
+            this.ClassesView.AllowUserToDeleteRows = false;
             this.ClassesView.AutoGenerateColumns = false;
             this.ClassesView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ClassesView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -161,6 +163,7 @@
             this.ClassesView.DataSource = this.classesBindingSource;
             this.ClassesView.Location = new System.Drawing.Point(12, 31);
             this.ClassesView.Name = "ClassesView";
+            this.ClassesView.ReadOnly = true;
             this.ClassesView.Size = new System.Drawing.Size(344, 141);
             this.ClassesView.TabIndex = 13;
             // 
@@ -169,18 +172,21 @@
             this.classNameDataGridViewTextBoxColumn.DataPropertyName = "ClassName";
             this.classNameDataGridViewTextBoxColumn.HeaderText = "ClassName";
             this.classNameDataGridViewTextBoxColumn.Name = "classNameDataGridViewTextBoxColumn";
+            this.classNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // teacherDataGridViewTextBoxColumn
             // 
             this.teacherDataGridViewTextBoxColumn.DataPropertyName = "Teacher";
             this.teacherDataGridViewTextBoxColumn.HeaderText = "Teacher";
             this.teacherDataGridViewTextBoxColumn.Name = "teacherDataGridViewTextBoxColumn";
+            this.teacherDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // gradeDataGridViewTextBoxColumn
             // 
             this.gradeDataGridViewTextBoxColumn.DataPropertyName = "Grade";
             this.gradeDataGridViewTextBoxColumn.HeaderText = "Grade";
             this.gradeDataGridViewTextBoxColumn.Name = "gradeDataGridViewTextBoxColumn";
+            this.gradeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // classesBindingSource
             // 

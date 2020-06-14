@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using SMIS.DBControl;
+
 using SMISSecurity;
 using SMISInternal;
 
@@ -47,20 +47,6 @@ namespace SMIS
 
 
         //----------------------------------------------------------------------------------------------------------------
-        //Parsing functions
-        private String generateTimeList()
-        {
-            if (!this.hours.Any())
-            {
-                Errors.DisplayMinor("Please choose teacher time");
-                return null;
-            }
-
-            String hrs = Time.generateTime(this.hours);
-            this.hlist = hrs;
-
-            return hrs;
-        }
 
         private Dictionary<String, String> parseName()
         {
@@ -108,13 +94,8 @@ namespace SMIS
                 return;
             }
 
-            String id = RandomString.Generate();
-            String hrs = generateTimeList();
 
-            if (hrs == null)
-            {
-                return;
-            }
+            String id = RandomString.Generate();
 
             Dictionary<string, string> namesDict = this.parseName();
 
@@ -126,32 +107,17 @@ namespace SMIS
             this.hours.Clear();
 
             this.smisDataSet.Teachers.AddTeachersRow(id, namesDict["first_name"], namesDict["last_name"], this.PhoneNumber.Text,
-                (int)AccessLevel.Default, this.Address.Text, hrs);
+                (int)AccessLevel.Default, this.Address.Text, null);
             this.smisDataSet.AcceptChanges();
-        }
 
-        private void AddHour_Click(object sender, EventArgs e)
-        {
-            if (EditMode)
-            {
-                Asserts.ASSERT(!(this.hlist == null));
-                EditHours eh = new EditHours(this.hlist);
- 
-                if (eh.Good()) {
-                    eh.ShowDialog();
-                    this.hlist = eh.GetHours();
-                }
-            }
-            else
-            {
-                this.hours.Add(this.TimePicker.Text);
-            }
+           
+            TecherTime setTime = new TecherTime(id);
+            setTime.ShowDialog();
         }
 
         private void TeachersView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             this.EditMode = true;
-            this.AddHour.Text = "Edit time";
             this.DoEdit.Visible = true;
             this.DoCancel.Visible = true;
             this.fillFromRow();
@@ -190,7 +156,6 @@ namespace SMIS
             this.EditMode = false;
             this.DoEdit.Visible = false;
             this.DoCancel.Visible = false;
-            this.AddHour.Text = "Add time";
         }
 
         private bool EditRow(String fname, String lname, String phone, String addrs)
