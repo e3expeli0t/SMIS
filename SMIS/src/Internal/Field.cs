@@ -23,5 +23,18 @@ namespace SMISInternal
 
             return valid;
         }
+
+        public static bool IsNumber(params String[] values)
+        {
+            bool valid = true;
+
+            foreach (String value in values)
+            {
+                int _;
+                valid = valid && int.TryParse(value, out _);
+            }
+
+            return valid;
+        }
     }
 }

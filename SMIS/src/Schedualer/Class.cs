@@ -11,9 +11,9 @@ namespace SMIS.Schedualer
         String grade;
         String name;
 
+        // Final version of construct
         public static Class Construct(Teacher teacher, String grade, String name)
         {
-
             return new Class(teacher, grade, name);
         }
 

@@ -7,27 +7,32 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SMISSecurity;
+using SMIS.Schedualer;
 using SMIS.DataBase;
 using SMISInternal;
 
 namespace SMIS
 {
-
     public partial class Classes : Form
     {
+        public static int first;
+        public static int second;
 
         const int CLASS_NAME = 0;
         const int TEACHER_NAME = 1;
         const int GRADE = 2;
-
-        private TeachersDBTable tDBTable;
 
         public Classes(AccessLevel level)
         {
             LevelAsserts.ASSERT_ADMIN_ACCESS(level);
 
             InitializeComponent();
-            this.tDBTable = new TeachersDBTable();
+
+            Teacher[] teachers = ScheduleInit.GetTeachers();
+
+            foreach (Teacher t in teachers) {
+                this.TeacherName.Items.Add(t.FirstName + " " + t.LastName);
+            }
         }
 
         private void Classes_Load(object sender, EventArgs e)
@@ -72,25 +77,17 @@ namespace SMIS
                 return;
             }
 
-            Dictionary<String, String> names = this.parseName();
-
-            if (Name == null) {
-                return;
-            }
-
-            //todo: check for valid grade
-            if (!this.tDBTable.Exists(names["first_name"]+" "+names["last_name"]))
+            if (this.TeacherOccupy(this.TeacherName.Text))
             {
-                Errors.DisplayMajor(String.Format("Couldn't find teacher named '{}'. please check agian.", this.TeacherName.Text));
+                Errors.DisplayMinor("Teacher name must be uniuqe");
                 return;
             }
-
 
             try
             {
                 this.smisDataSet.Classes.AddClassesRow(this.ClassName.Text, this.TeacherName.Text, this.Grade.Text);
             }
-            catch (ConstraintException ex)
+            catch (ConstraintException)
             {
                 Errors.DisplayMinor("Class name must be uniuqe");
                 return;
@@ -99,6 +96,21 @@ namespace SMIS
             this.classesTableAdapter.Update(this.smisDataSet.Classes);
 
             this.smisDataSet.AcceptChanges();
+        }
+
+        private bool TeacherOccupy(String teacher_name) {
+
+            foreach (DataGridViewRow row in ClassesView.Rows)
+            {
+                if (row.Cells[1].Value.ToString().Contains(teacher_name))
+                {
+                    row.Cells[1].Style.BackColor = Color.Red;
+                    return true;
+                }
+                
+            }
+
+            return false;
         }
 
         private void ClassesView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -148,38 +160,16 @@ namespace SMIS
             this.search();
         }
 
-        private Dictionary<String, String> parseName()
+        private void Remove_Click(object sender, EventArgs e)
         {
-            String[] names = this.TeacherName.Text.Split(' ', '\t');
-
-            if (names.Length < 2)
+            if (this.ClassesView.CurrentRow.Index > this.ClassesView.RowCount)
             {
-                Errors.DisplayMinor("Please supply full name.");
-                return null;
+                Errors.DisplayMinor("There is no data to remove");
+                return;
             }
 
-            String firstName = names[0];
-            String lastName = names[1];
-
-            if (names.Length > 2)
-            {
-                lastName = names.LastOrDefault();
-                names = names.Take(names.Length - 1).ToArray();
-
-                firstName = "";
-                foreach (String name in names)
-                {
-                    firstName += name + " ";
-                }
-
-                firstName = firstName.Take(firstName.Length - 1).ElementAt(0).ToString();
-            }
-            Dictionary<string, string> names_dict = new Dictionary<string, string>();
-
-            names_dict.Add("first_name", firstName);
-            names_dict.Add("last_name", lastName);
-
-            return names_dict;
+            this.smisDataSet.Classes[this.ClassesView.CurrentRow.Index].Delete();
+            this.classesTableAdapter.Update(this.smisDataSet.Classes);
         }
     }
 }

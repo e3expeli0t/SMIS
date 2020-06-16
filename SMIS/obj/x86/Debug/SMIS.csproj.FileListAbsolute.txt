@@ -18,3 +18,5 @@ C:\Users\תלמיד משתמש\documents\visual studio 2010\Projects\SMIS\SMIS\o
 C:\Users\תלמיד משתמש\documents\visual studio 2010\Projects\SMIS\SMIS\obj\x86\Debug\SMIS.exe
 C:\Users\תלמיד משתמש\documents\visual studio 2010\Projects\SMIS\SMIS\obj\x86\Debug\SMIS.pdb
 C:\Users\תלמיד משתמש\documents\visual studio 2010\Projects\SMIS\SMIS\obj\x86\Debug\SMIS.TecherTime.resources
+C:\Users\תלמיד משתמש\Documents\Visual Studio 2010\Projects\SMIS\SMIS\obj\x86\Debug\SMIS.csprojResolveAssemblyReference.cache
+C:\Users\תלמיד משתמש\Documents\Visual Studio 2010\Projects\SMIS\SMIS\obj\x86\Debug\SMIS.ViewUTime.resources

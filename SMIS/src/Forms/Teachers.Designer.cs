@@ -44,16 +44,18 @@
             this.TeacherName = new System.Windows.Forms.TextBox();
             this.PhoneNumber = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.Address = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.DoDelete = new System.Windows.Forms.Button();
             this.teachersTableAdapter = new SMIS.SmisDataSetTableAdapters.TeachersTableAdapter();
             this.DoEdit = new System.Windows.Forms.Button();
             this.DoCancel = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TotalTime = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.IDNum = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.addr = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.TeachersView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
@@ -177,23 +179,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Phone";
             // 
-            // Address
-            // 
-            this.Address.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Address.Location = new System.Drawing.Point(323, 363);
-            this.Address.Name = "Address";
-            this.Address.Size = new System.Drawing.Size(117, 20);
-            this.Address.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(265, 366);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Address";
-            // 
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -248,13 +233,13 @@
             this.DoCancel.Visible = false;
             this.DoCancel.Click += new System.EventHandler(this.DoCancel_Click);
             // 
-            // textBox2
+            // TotalTime
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Location = new System.Drawing.Point(531, 295);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(117, 20);
-            this.textBox2.TabIndex = 19;
+            this.TotalTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TotalTime.Location = new System.Drawing.Point(531, 295);
+            this.TotalTime.Name = "TotalTime";
+            this.TotalTime.Size = new System.Drawing.Size(117, 20);
+            this.TotalTime.TabIndex = 19;
             // 
             // label4
             // 
@@ -265,20 +250,56 @@
             this.label4.TabIndex = 18;
             this.label4.Text = "Total Time";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(457, 330);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Address";
+            // 
+            // IDNum
+            // 
+            this.IDNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.IDNum.Location = new System.Drawing.Point(323, 359);
+            this.IDNum.Name = "IDNum";
+            this.IDNum.Size = new System.Drawing.Size(117, 20);
+            this.IDNum.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(249, 361);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "ID number";
+            // 
+            // addr
+            // 
+            this.addr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.addr.Location = new System.Drawing.Point(531, 330);
+            this.addr.Name = "addr";
+            this.addr.Size = new System.Drawing.Size(117, 20);
+            this.addr.TabIndex = 23;
+            // 
             // Teachers
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 517);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.addr);
+            this.Controls.Add(this.IDNum);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.TotalTime);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.DoCancel);
             this.Controls.Add(this.DoEdit);
             this.Controls.Add(this.DoDelete);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.Address);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.PhoneNumber);
             this.Controls.Add(this.label2);
@@ -305,8 +326,6 @@
         private System.Windows.Forms.TextBox TeacherName;
         private System.Windows.Forms.TextBox PhoneNumber;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox Address;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button DoDelete;
@@ -322,7 +341,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn hoursDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button DoEdit;
         private System.Windows.Forms.Button DoCancel;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TotalTime;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox IDNum;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox addr;
     }
 }

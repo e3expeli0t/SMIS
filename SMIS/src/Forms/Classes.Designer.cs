@@ -35,7 +35,6 @@
             this.ClassName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.TeacherName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.Grade = new System.Windows.Forms.TextBox();
             this.Search = new System.Windows.Forms.TextBox();
@@ -48,6 +47,7 @@
             this.smisDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.smisDataSet = new SMIS.SmisDataSet();
             this.classesTableAdapter = new SMIS.SmisDataSetTableAdapters.ClassesTableAdapter();
+            this.TeacherName = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ClassesView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
@@ -66,12 +66,13 @@
             // 
             // Remove
             // 
-            this.Remove.Location = new System.Drawing.Point(286, 326);
+            this.Remove.Location = new System.Drawing.Point(212, 328);
             this.Remove.Name = "Remove";
             this.Remove.Size = new System.Drawing.Size(70, 27);
             this.Remove.TabIndex = 2;
             this.Remove.Text = "Remove";
             this.Remove.UseVisualStyleBackColor = true;
+            this.Remove.Click += new System.EventHandler(this.Remove_Click);
             // 
             // Edit
             // 
@@ -94,7 +95,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 232);
+            this.label1.Location = new System.Drawing.Point(16, 232);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 5;
@@ -103,23 +104,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 258);
+            this.label2.Location = new System.Drawing.Point(16, 258);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Teacher";
             // 
-            // TeacherName
-            // 
-            this.TeacherName.Location = new System.Drawing.Point(79, 255);
-            this.TeacherName.Name = "TeacherName";
-            this.TeacherName.Size = new System.Drawing.Size(100, 20);
-            this.TeacherName.TabIndex = 6;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 284);
+            this.label3.Location = new System.Drawing.Point(16, 288);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 9;
@@ -134,7 +128,7 @@
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(262, 277);
+            this.Search.Location = new System.Drawing.Point(65, 12);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(100, 20);
             this.Search.TabIndex = 11;
@@ -142,7 +136,7 @@
             // 
             // DoSearch
             // 
-            this.DoSearch.Location = new System.Drawing.Point(209, 274);
+            this.DoSearch.Location = new System.Drawing.Point(12, 9);
             this.DoSearch.Name = "DoSearch";
             this.DoSearch.Size = new System.Drawing.Size(47, 27);
             this.DoSearch.TabIndex = 12;
@@ -161,7 +155,7 @@
             this.teacherDataGridViewTextBoxColumn,
             this.gradeDataGridViewTextBoxColumn});
             this.ClassesView.DataSource = this.classesBindingSource;
-            this.ClassesView.Location = new System.Drawing.Point(12, 31);
+            this.ClassesView.Location = new System.Drawing.Point(11, 47);
             this.ClassesView.Name = "ClassesView";
             this.ClassesView.ReadOnly = true;
             this.ClassesView.Size = new System.Drawing.Size(344, 141);
@@ -207,18 +201,29 @@
             // 
             this.classesTableAdapter.ClearBeforeFill = true;
             // 
+            // TeacherName
+            // 
+            this.TeacherName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.TeacherName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.TeacherName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TeacherName.FormattingEnabled = true;
+            this.TeacherName.Location = new System.Drawing.Point(79, 255);
+            this.TeacherName.Name = "TeacherName";
+            this.TeacherName.Size = new System.Drawing.Size(121, 21);
+            this.TeacherName.TabIndex = 14;
+            // 
             // Classes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 376);
+            this.Controls.Add(this.TeacherName);
             this.Controls.Add(this.ClassesView);
             this.Controls.Add(this.DoSearch);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Grade);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.TeacherName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ClassName);
             this.Controls.Add(this.Edit);
@@ -244,7 +249,6 @@
         private System.Windows.Forms.TextBox ClassName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TeacherName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox Grade;
         private System.Windows.Forms.TextBox Search;
@@ -257,5 +261,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn classNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn teacherDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gradeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ComboBox TeacherName;
     }
 }

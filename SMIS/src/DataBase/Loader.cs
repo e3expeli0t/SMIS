@@ -25,7 +25,10 @@ namespace SMIS.DataBase
         private Teachers_SubjectsTableAdapter ts_table;
         private Subjects_ClassesTableAdapter sc_table;
 
-        public ScheduleInit() {
+        private bool valid = true;
+
+        public ScheduleInit()
+        {
             this.smisDataSet = new SmisDataSet();
 
             this.smisDataSet.DataSetName = "SmisDataSet";
@@ -39,7 +42,8 @@ namespace SMIS.DataBase
             this.sc_table.Fill(this.smisDataSet.Subjects_Classes);
             this.ts_table.Fill(this.smisDataSet.Teachers_Subjects);
 
-            if (!this.smisDataSet.Subjects.Any()) {
+            if (!this.smisDataSet.Subjects.Any())
+            {
                 Errors.DisplayMajor("Database didn't load properly.\nOr there is no subjects to load, please try reloading the application or adding subjects");
             }
 
@@ -72,40 +76,27 @@ namespace SMIS.DataBase
 
         }
 
-        public void Reset() {
+        public void Reset()
+        {
             this.smisDataSet.Reset();
         }
 
-        // todo: Add times to teacher object
-        public Teacher[] GetTeachers() 
+
+        public static SmisDataSet.TeachersRow GetTeacherRow(String id)
         {
-            int FIRST_NAME = 1;
-            int LAST_NAME = 2;
-
-            List<Teacher> teachers = new List<Teacher>();
-            foreach ( DataRow dr in this.smisDataSet.Teachers.Rows) {
-                teachers.Add(
-                         Teacher.Construct(dr[FIRST_NAME].ToString(), dr[LAST_NAME].ToString(), dr[0].ToString())
-                    );
-            } 
-
-            Asserts.ASSERT(teachers.Any());
-
-            return teachers.ToArray();
-        }
-
-        public static SmisDataSet.TeachersRow GetTeacherRow(String id) {
             SmisDataSet ds = new SmisDataSet();
             TeachersTableAdapter teachers_table = new TeachersTableAdapter();
 
             teachers_table.Fill(ds.Teachers);
-            if (ds.Teachers.Any())
+            if (!ds.Teachers.Any())
             {
                 Errors.DisplayMajor("Database didn't load properly.\nOr there is no teachers to load, please try reloading the application or adding teachers");
             }
 
-            foreach (SmisDataSet.TeachersRow r in ds.Teachers.Rows) {
-                if (r.TeacherID == id) {
+            foreach (SmisDataSet.TeachersRow r in ds.Teachers.Rows)
+            {
+                if (r.TeacherID == id)
+                {
                     return r;
                 }
             }
@@ -113,73 +104,66 @@ namespace SMIS.DataBase
             return null;
         }
 
-        //Todo: This shoud handle only ID
-        public Teacher GetTeacherByName(String name) {
+        //todp: remove code duplications 
+        public static Teacher[] GetTeachers()
+        {
+            SmisDataSet ds = new SmisDataSet();
+            TeachersTableAdapter teachers_table = new TeachersTableAdapter();
 
-            Teacher teacher;
+            teachers_table.Fill(ds.Teachers);
+            if (!ds.Teachers.Any())
+            {
+                Errors.DisplayMajor("Database didn't load properly.\nOr there is no teachers to load, please try reloading the application or adding teachers");
+            }
 
             int FIRST_NAME = 1;
             int LAST_NAME = 2;
 
-            foreach (DataRow row in this.smisDataSet.Teachers.Rows) {
-                if (row[FIRST_NAME].ToString() + " " + row[LAST_NAME].ToString() == name) {
-                    Asserts.ASSERT_NOT_REACHED();
-                }
-            }
-
-            return null;
-        }
-
-        public bool TeacherExistsStrong(String id = "") {
-            Asserts.ASSERT(id.Any(), "Can't search for empty id");
-
-            foreach (DataRow dr in this.smisDataSet.Teachers.Rows) {
-                if (dr[0].ToString() == id) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public Class[] GetClasses()
-        {
-            int NAME = 0;
-            int TEACHER = 1;
-            int GRADE = 2;
-            
-
-            List<Classes> teachers = new List<Classes>();
-            foreach (DataRow dr in this.smisDataSet.Teachers.Rows)
+            List<Teacher> teachers = new List<Teacher>();
+            foreach (DataRow dr in ds.Teachers.Rows)
             {
-                Asserts.ASSERT_NOT_REACHED();
+                teachers.Add(
+                         Teacher.Construct(dr[FIRST_NAME].ToString(), dr[LAST_NAME].ToString(), dr[0].ToString())
+                    );
             }
 
             Asserts.ASSERT(teachers.Any());
 
-            return null;
+            return teachers.ToArray();
         }
 
-        public bool TeacherExistsSoft(String fname, String lname)
+
+        public static Class[] GetClasses(Dictionary<String, Teacher> teachers)
         {
-            Asserts.ASSERT(fname.Any() && lname.Any(), "Can't search for empty name");
-            int FIRST_NAME = 1;
-            int LAST_NAME = 2;
+            SmisDataSet ds = new SmisDataSet();
+            ClassesTableAdapter clasess_table = new ClassesTableAdapter();
 
+            clasess_table.Fill(ds.Classes);
 
-            Debug.WriteLine(fname, lname);
-
-            foreach (DataRow dr in this.smisDataSet.Teachers.Rows)
+            if (!ds.Classes.Any())
             {
-                if (dr[FIRST_NAME].ToString() == fname.Trim() && dr[LAST_NAME].ToString() == lname.Trim())
-                {
-                    return true;
-                }
+                Errors.DisplayMajor("Database didn't load properly.\nOr there is no classes to load, please try reloading the application or adding classes");
             }
 
-            Asserts.ASSERT_NOT_REACHED();
+            int NAME = 0;
+            int TEACHER = 1;
+            int GRADE = 2;
 
-            return false;
+
+            List<Class> classes = new List<Class>();
+
+            foreach (DataRow dr in  ds.Classes.Rows)
+            {
+
+                classes.Add(
+                         Class.Construct(teachers[dr[TEACHER].ToString()], dr[GRADE].ToString(), dr[NAME].ToString())
+                    );
+            }
+
+            Asserts.ASSERT(teachers.Any());
+
+            return classes.ToArray();
         }
+
     }
 }

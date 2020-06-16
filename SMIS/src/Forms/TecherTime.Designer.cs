@@ -30,25 +30,28 @@
         {
             this.components = new System.ComponentModel.Container();
             this.TTimeView = new System.Windows.Forms.DataGridView();
-            this.smisDataSet = new SMIS.SmisDataSet();
-            this.unavailableTimeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.unavailableTimeTableAdapter = new SMIS.SmisDataSetTableAdapters.UnavailableTimeTableAdapter();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.teacherIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unavailableTimeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.smisDataSet = new SMIS.SmisDataSet();
+            this.unavailableTimeTableAdapter = new SMIS.SmisDataSetTableAdapters.UnavailableTimeTableAdapter();
             this.DoAdd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Day = new System.Windows.Forms.ComboBox();
             this.TimeList = new System.Windows.Forms.ComboBox();
+            this.DoRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TTimeView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unavailableTimeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // TTimeView
             // 
+            this.TTimeView.AllowUserToAddRows = false;
+            this.TTimeView.AllowUserToDeleteRows = false;
             this.TTimeView.AutoGenerateColumns = false;
             this.TTimeView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.TTimeView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -59,22 +62,9 @@
             this.TTimeView.DataSource = this.unavailableTimeBindingSource;
             this.TTimeView.Location = new System.Drawing.Point(47, 12);
             this.TTimeView.Name = "TTimeView";
+            this.TTimeView.ReadOnly = true;
             this.TTimeView.Size = new System.Drawing.Size(445, 153);
             this.TTimeView.TabIndex = 1;
-            // 
-            // smisDataSet
-            // 
-            this.smisDataSet.DataSetName = "SmisDataSet";
-            this.smisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // unavailableTimeBindingSource
-            // 
-            this.unavailableTimeBindingSource.DataMember = "UnavailableTime";
-            this.unavailableTimeBindingSource.DataSource = this.smisDataSet;
-            // 
-            // unavailableTimeTableAdapter
-            // 
-            this.unavailableTimeTableAdapter.ClearBeforeFill = true;
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -100,9 +90,24 @@
             this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
             this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
             // 
+            // unavailableTimeBindingSource
+            // 
+            this.unavailableTimeBindingSource.DataMember = "UnavailableTime";
+            this.unavailableTimeBindingSource.DataSource = this.smisDataSet;
+            // 
+            // smisDataSet
+            // 
+            this.smisDataSet.DataSetName = "SmisDataSet";
+            this.smisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // unavailableTimeTableAdapter
+            // 
+            this.unavailableTimeTableAdapter.ClearBeforeFill = true;
+            // 
             // DoAdd
             // 
-            this.DoAdd.Location = new System.Drawing.Point(186, 314);
+            this.DoAdd.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.DoAdd.Location = new System.Drawing.Point(138, 314);
             this.DoAdd.Name = "DoAdd";
             this.DoAdd.Size = new System.Drawing.Size(75, 23);
             this.DoAdd.TabIndex = 2;
@@ -154,11 +159,23 @@
             this.TimeList.Size = new System.Drawing.Size(121, 21);
             this.TimeList.TabIndex = 8;
             // 
+            // DoRemove
+            // 
+            this.DoRemove.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.DoRemove.Location = new System.Drawing.Point(235, 314);
+            this.DoRemove.Name = "DoRemove";
+            this.DoRemove.Size = new System.Drawing.Size(75, 23);
+            this.DoRemove.TabIndex = 9;
+            this.DoRemove.Text = "Remove";
+            this.DoRemove.UseVisualStyleBackColor = true;
+            this.DoRemove.Click += new System.EventHandler(this.DoRemove_Click);
+            // 
             // TecherTime
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 349);
+            this.Controls.Add(this.DoRemove);
             this.Controls.Add(this.TimeList);
             this.Controls.Add(this.Day);
             this.Controls.Add(this.label2);
@@ -169,8 +186,8 @@
             this.Text = "TecherTime";
             this.Load += new System.EventHandler(this.TecherTime_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TTimeView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unavailableTimeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,6 +208,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox Day;
         private System.Windows.Forms.ComboBox TimeList;
-
+        private System.Windows.Forms.Button DoRemove;
     }
 }

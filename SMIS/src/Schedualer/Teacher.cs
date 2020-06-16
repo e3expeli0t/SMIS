@@ -50,6 +50,14 @@ namespace SMIS.Schedualer
             }
         }
 
+        public String Id
+        {
+            get
+            {
+                return this.id;
+            }
+        }
+
         public DateTime[] PreferdTime
         {
             get

@@ -53,7 +53,7 @@ namespace SMIS
 
         private void Groups_Click(object sender, EventArgs e)
         {
-            new Groups().ShowDialog();
+            new Groups(AccessLevel.Admin).ShowDialog();
         }
     }
 }

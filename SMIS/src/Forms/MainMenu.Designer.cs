@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.Classes = new System.Windows.Forms.Button();
-            this.Groups = new System.Windows.Forms.Button();
+            this.SubjectTeachers = new System.Windows.Forms.Button();
             this.Subjects = new System.Windows.Forms.Button();
             this.Teachers = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.Groups = new System.Windows.Forms.Button();
+            this.ViewUTime = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Classes
@@ -45,15 +47,14 @@
             this.Classes.UseVisualStyleBackColor = true;
             this.Classes.Click += new System.EventHandler(this.Classes_Click);
             // 
-            // Groups
+            // SubjectTeachers
             // 
-            this.Groups.Location = new System.Drawing.Point(597, 373);
-            this.Groups.Name = "Groups";
-            this.Groups.Size = new System.Drawing.Size(138, 49);
-            this.Groups.TabIndex = 1;
-            this.Groups.Text = "View Groups";
-            this.Groups.UseVisualStyleBackColor = true;
-            this.Groups.Click += new System.EventHandler(this.Groups_Click);
+            this.SubjectTeachers.Location = new System.Drawing.Point(423, 369);
+            this.SubjectTeachers.Name = "SubjectTeachers";
+            this.SubjectTeachers.Size = new System.Drawing.Size(138, 49);
+            this.SubjectTeachers.TabIndex = 1;
+            this.SubjectTeachers.Text = "Subjects Teachers";
+            this.SubjectTeachers.UseVisualStyleBackColor = true;
             // 
             // Subjects
             // 
@@ -82,15 +83,36 @@
             this.progressBar1.Size = new System.Drawing.Size(376, 83);
             this.progressBar1.TabIndex = 4;
             // 
+            // Groups
+            // 
+            this.Groups.Location = new System.Drawing.Point(597, 369);
+            this.Groups.Name = "Groups";
+            this.Groups.Size = new System.Drawing.Size(138, 49);
+            this.Groups.TabIndex = 5;
+            this.Groups.Text = "View Groups";
+            this.Groups.UseVisualStyleBackColor = true;
+            this.Groups.Click += new System.EventHandler(this.Groups_Click);
+            // 
+            // ViewUTime
+            // 
+            this.ViewUTime.Location = new System.Drawing.Point(758, 369);
+            this.ViewUTime.Name = "ViewUTime";
+            this.ViewUTime.Size = new System.Drawing.Size(138, 49);
+            this.ViewUTime.TabIndex = 6;
+            this.ViewUTime.Text = "View Hours";
+            this.ViewUTime.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1287, 579);
+            this.Controls.Add(this.ViewUTime);
+            this.Controls.Add(this.Groups);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.Teachers);
             this.Controls.Add(this.Subjects);
-            this.Controls.Add(this.Groups);
+            this.Controls.Add(this.SubjectTeachers);
             this.Controls.Add(this.Classes);
             this.Name = "MainMenu";
             this.Text = "textt";
@@ -102,9 +124,11 @@
         #endregion
 
         private System.Windows.Forms.Button Classes;
-        private System.Windows.Forms.Button Groups;
+        private System.Windows.Forms.Button SubjectTeachers;
         private System.Windows.Forms.Button Subjects;
         private System.Windows.Forms.Button Teachers;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button Groups;
+        private System.Windows.Forms.Button ViewUTime;
     }
 }

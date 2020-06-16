@@ -140,6 +140,12 @@
     <Compile Include="src\Forms\Groups.Designer.cs">
       <DependentUpon>Groups.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\Forms\ViewUTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Forms\ViewUTime.Designer.cs">
+      <DependentUpon>ViewUTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\Internal\Asserts.cs" />
     <Compile Include="src\Internal\Errors.cs" />
     <Compile Include="src\Internal\Field.cs" />
@@ -228,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\Forms\TecherTime.resx">
       <DependentUpon>TecherTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Forms\ViewUTime.resx">
+      <DependentUpon>ViewUTime.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>

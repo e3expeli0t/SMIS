@@ -88,14 +88,16 @@ namespace SMIS
 
         private void DoSave_Click(object sender, EventArgs e)
         {
-            if (!Field.Valid(this.TeacherName.Text, this.PhoneNumber.Text, this.Address.Text))
+            if (!Field.Valid(this.TeacherName.Text, this.PhoneNumber.Text, this.addr.Text))
             {
                 Errors.DisplayMinor("One or more input fields are empty");
                 return;
             }
 
-
-            String id = RandomString.Generate();
+            if (!Field.IsNumber(this.PhoneNumber.Text, this.TotalTime.Text, this.IDNum.Text)) {
+                Errors.DisplayMinor("phone number' total time and id should be numbers");
+                return;
+            }
 
             Dictionary<string, string> namesDict = this.parseName();
 
@@ -104,14 +106,13 @@ namespace SMIS
                 return;
             }
 
-            this.hours.Clear();
-
-            this.smisDataSet.Teachers.AddTeachersRow(id, namesDict["first_name"], namesDict["last_name"], this.PhoneNumber.Text,
-                (int)AccessLevel.Default, this.Address.Text, null);
+            this.smisDataSet.Teachers.AddTeachersRow(this.IDNum.Text, namesDict["first_name"], namesDict["last_name"], this.PhoneNumber.Text,
+                (int)AccessLevel.Default, this.addr.Text, this.TotalTime.Text);
+            this.teachersTableAdapter.Update(this.smisDataSet.Teachers);
             this.smisDataSet.AcceptChanges();
 
            
-            TecherTime setTime = new TecherTime(id);
+            TecherTime setTime = new TecherTime(this.IDNum.Text);
             setTime.ShowDialog();
         }
 
@@ -125,7 +126,14 @@ namespace SMIS
 
         private void DoDelete_Click(object sender, EventArgs e)
         {
-            Errors.DisplayMajor("Can't remove item");
+            if (this.TeachersView.CurrentRow.Index > this.TeachersView.RowCount)
+            {
+                Errors.DisplayMinor("There is no data to remove");
+                return;
+            }
+
+            this.smisDataSet.Teachers[this.TeachersView.CurrentRow.Index].Delete();
+            this.teachersTableAdapter.Update(this.smisDataSet.Teachers);
         }
 
         private void DoEdit_Click(object sender, EventArgs e)
@@ -138,7 +146,7 @@ namespace SMIS
                 return;
             }
 
-            this.EditRow(names["first_name"], names["last_name"], this.PhoneNumber.Text, Address.Text);
+            this.EditRow(names["first_name"], names["last_name"], this.PhoneNumber.Text, this.addr.Text);
             return;
         }
 
@@ -186,7 +194,7 @@ namespace SMIS
                 this.TeacherName.Text = this.smisDataSet.Teachers.Rows[index][FIRST_NAME].ToString() +
                     " " + this.smisDataSet.Teachers.Rows[index][LAST_NAME].ToString();
                 this.PhoneNumber.Text = this.smisDataSet.Teachers.Rows[index][PHONE].ToString();
-                this.Address.Text = this.smisDataSet.Teachers.Rows[index][ADDRESS].ToString();
+                this.addr.Text = this.smisDataSet.Teachers.Rows[index][ADDRESS].ToString();
 
 
                 this.hlist = this.smisDataSet.Teachers.Rows[index][HOURES].ToString();
