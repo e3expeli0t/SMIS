@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using SMIS.Schedualer;
+using SMIS.Scheduler;
 using SMIS.DataBase;
 
 namespace SMIS

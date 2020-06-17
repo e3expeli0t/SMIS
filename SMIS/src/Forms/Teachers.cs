@@ -88,6 +88,11 @@ namespace SMIS
 
         private void DoSave_Click(object sender, EventArgs e)
         {
+            if (this.smisDataSet.HasChanges())
+            {
+                this.smisDataSet.AcceptChanges();
+            }
+
             if (!Field.Valid(this.TeacherName.Text, this.PhoneNumber.Text, this.addr.Text))
             {
                 Errors.DisplayMinor("One or more input fields are empty");
@@ -108,9 +113,8 @@ namespace SMIS
 
             this.smisDataSet.Teachers.AddTeachersRow(this.IDNum.Text, namesDict["first_name"], namesDict["last_name"], this.PhoneNumber.Text,
                 (int)AccessLevel.Default, this.addr.Text, this.TotalTime.Text);
-            this.teachersTableAdapter.Update(this.smisDataSet.Teachers);
-            this.smisDataSet.AcceptChanges();
 
+            this.teachersTableAdapter.Update(this.smisDataSet.Teachers);
            
             TecherTime setTime = new TecherTime(this.IDNum.Text);
             setTime.ShowDialog();

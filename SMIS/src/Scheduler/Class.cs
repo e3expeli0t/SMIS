@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SMIS.Schedualer
+namespace SMIS.Scheduler
 {
     class Class
     {

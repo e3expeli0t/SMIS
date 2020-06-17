@@ -40,6 +40,7 @@
             this.DoEdit = new System.Windows.Forms.Button();
             this.Subject = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.DoRemove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SubjectsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subjectsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
@@ -48,6 +49,8 @@
             // 
             // SubjectsView
             // 
+            this.SubjectsView.AllowUserToAddRows = false;
+            this.SubjectsView.AllowUserToDeleteRows = false;
             this.SubjectsView.AutoGenerateColumns = false;
             this.SubjectsView.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
             this.SubjectsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -55,11 +58,12 @@
             this.lIDDataGridViewTextBoxColumn,
             this.lNameDataGridViewTextBoxColumn});
             this.SubjectsView.DataSource = this.subjectsBindingSource;
-            this.SubjectsView.Location = new System.Drawing.Point(37, 12);
+            this.SubjectsView.Location = new System.Drawing.Point(12, 12);
             this.SubjectsView.Name = "SubjectsView";
+            this.SubjectsView.ReadOnly = true;
             this.SubjectsView.Size = new System.Drawing.Size(245, 132);
             this.SubjectsView.TabIndex = 1;
-            this.SubjectsView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SubjectsView_CellContentClick);
+            this.SubjectsView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SubjectsView_CellClick);
             // 
             // lIDDataGridViewTextBoxColumn
             // 
@@ -95,18 +99,18 @@
             // DoSave
             // 
             this.DoSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoSave.Location = new System.Drawing.Point(64, 208);
+            this.DoSave.Location = new System.Drawing.Point(12, 205);
             this.DoSave.Name = "DoSave";
             this.DoSave.Size = new System.Drawing.Size(93, 33);
             this.DoSave.TabIndex = 2;
-            this.DoSave.Text = "Save";
+            this.DoSave.Text = "New";
             this.DoSave.UseVisualStyleBackColor = true;
             this.DoSave.Click += new System.EventHandler(this.DoSave_Click);
             // 
             // DoEdit
             // 
             this.DoEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoEdit.Location = new System.Drawing.Point(163, 208);
+            this.DoEdit.Location = new System.Drawing.Point(164, 205);
             this.DoEdit.Name = "DoEdit";
             this.DoEdit.Size = new System.Drawing.Size(93, 33);
             this.DoEdit.TabIndex = 3;
@@ -117,7 +121,7 @@
             // 
             // Subject
             // 
-            this.Subject.Location = new System.Drawing.Point(119, 163);
+            this.Subject.Location = new System.Drawing.Point(92, 163);
             this.Subject.Name = "Subject";
             this.Subject.Size = new System.Drawing.Size(100, 20);
             this.Subject.TabIndex = 4;
@@ -126,18 +130,28 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(78, 163);
+            this.label1.Location = new System.Drawing.Point(51, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Name";
             // 
+            // DoRemove
+            // 
+            this.DoRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DoRemove.Location = new System.Drawing.Point(164, 205);
+            this.DoRemove.Name = "DoRemove";
+            this.DoRemove.Size = new System.Drawing.Size(93, 33);
+            this.DoRemove.TabIndex = 6;
+            this.DoRemove.Text = "Delete";
+            this.DoRemove.UseVisualStyleBackColor = false;
+            // 
             // Subjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::SMIS.Properties.Resources.Background;
-            this.ClientSize = new System.Drawing.Size(297, 289);
+            this.ClientSize = new System.Drawing.Size(278, 255);
+            this.Controls.Add(this.DoRemove);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Subject);
             this.Controls.Add(this.DoEdit);
@@ -168,5 +182,6 @@
         private System.Windows.Forms.Button DoEdit;
         private System.Windows.Forms.TextBox Subject;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button DoRemove;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SMIS.Schedualer;
+using SMIS.Scheduler;
 using SMISInternal;
 using System.Data;
 using System.Data.OleDb;
@@ -133,6 +133,7 @@ namespace SMIS.DataBase
         }
 
 
+        //Note: can be collision in teacher name
         public static Class[] GetClasses(Dictionary<String, Teacher> teachers)
         {
             SmisDataSet ds = new SmisDataSet();
@@ -152,9 +153,8 @@ namespace SMIS.DataBase
 
             List<Class> classes = new List<Class>();
 
-            foreach (DataRow dr in  ds.Classes.Rows)
+            foreach (DataRow dr in ds.Classes.Rows)
             {
-
                 classes.Add(
                          Class.Construct(teachers[dr[TEACHER].ToString()], dr[GRADE].ToString(), dr[NAME].ToString())
                     );
@@ -163,6 +163,82 @@ namespace SMIS.DataBase
             Asserts.ASSERT(teachers.Any());
 
             return classes.ToArray();
+        }
+
+        public static SmisDataSet.ClassesRow GetClassRow(String class_name)
+        {
+            SmisDataSet ds = new SmisDataSet();
+            ClassesTableAdapter clasess_table = new ClassesTableAdapter();
+
+            clasess_table.Fill(ds.Classes);
+
+            if (!ds.Classes.Any())
+            {
+                Errors.DisplayMajor("Database didn't load properly.\nOr there is no classes to load, please try reloading the application or adding classes");
+            }
+
+            foreach (SmisDataSet.ClassesRow dr in ds.Classes) {
+                if (dr[0].ToString() == class_name) {
+                    return dr;
+                }
+            }
+
+            return null;
+        }
+
+        public static Subject[] GetSubjects()
+        {
+            SmisDataSet ds = new SmisDataSet();
+            SubjectsTableAdapter subject_table = new SubjectsTableAdapter();
+
+            subject_table.Fill(ds.Subjects);
+
+            List<Subject> subjects = new List<Subject>();
+
+            if (!ds.Subjects.Any())
+            {
+                Errors.DisplayMajor("Database didn't load properly.\nOr there is no subjects to load, please try reloading the application or adding subjects");
+            }
+
+            if (ds.HasChanges())
+            {
+                ds.AcceptChanges();
+            }
+
+            foreach (DataRow dr in ds.Subjects.Rows)
+            {
+                subjects.Add(
+                         Subject.Construct(dr[1].ToString(), dr[0].ToString())
+                    );
+            }
+
+            Asserts.ASSERT(subjects.Any(), "Empty datatable");
+
+            return subjects.ToArray();
+        }
+
+        public static SmisDataSet.SubjectsRow GetSubjectRow(String id)
+        {
+
+            SmisDataSet ds = new SmisDataSet();
+            SubjectsTableAdapter subject_table = new SubjectsTableAdapter();
+
+            subject_table.Fill(ds.Subjects);
+            
+            if (!ds.Subjects.Any())
+            {
+                Errors.DisplayMajor("Database didn't load properly.\nOr there is no subjects to load, please try reloading the application or adding subjects");
+            }
+
+            foreach (SmisDataSet.SubjectsRow r in ds.Subjects.Rows)
+            {
+                if (r.LID == id)
+                {
+                    return r;
+                }
+            }
+
+            return null;
         }
 
     }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SMISSecurity;
+using SMISInternal;
 
 
 /*
@@ -54,6 +55,22 @@ namespace SMIS
         private void Groups_Click(object sender, EventArgs e)
         {
             new Groups(AccessLevel.Admin).ShowDialog();
+        }
+
+        private void ViewUTime_Click(object sender, EventArgs e)
+        {
+            new ViewUTime().ShowDialog();
+        }
+
+        private void SubjectTeachers_Click(object sender, EventArgs e)
+        {
+            new TeachersSubjects(AdminAccsess).ShowDialog();
+
+        }
+
+        private void SubjectClasses_Click(object sender, EventArgs e)
+        {
+            new SubjectClassess().ShowDialog();
         }
     }
 }

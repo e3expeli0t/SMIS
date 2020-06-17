@@ -140,6 +140,18 @@
     <Compile Include="src\Forms\Groups.Designer.cs">
       <DependentUpon>Groups.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\Forms\SubjectClassess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Forms\SubjectClassess.Designer.cs">
+      <DependentUpon>SubjectClassess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Forms\TeachersSubjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Forms\TeachersSubjects.Designer.cs">
+      <DependentUpon>TeachersSubjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\Forms\ViewUTime.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,9 +176,10 @@
     <Compile Include="src\Internal\Time.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Schedualer\Class.cs" />
-    <Compile Include="src\Schedualer\Group.cs" />
-    <Compile Include="src\Schedualer\Teacher.cs" />
+    <Compile Include="src\Scheduler\Class.cs" />
+    <Compile Include="src\Scheduler\Subject.cs" />
+    <Compile Include="src\Scheduler\Group.cs" />
+    <Compile Include="src\Scheduler\Teacher.cs" />
     <Compile Include="src\Security\AccessLevel.cs" />
     <Compile Include="src\Security\Login.cs" />
     <Compile Include="src\Security\RandomString.cs" />
@@ -226,11 +239,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="src\Forms\SubjectClassess.resx">
+      <DependentUpon>SubjectClassess.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\Forms\Subjects.resx">
       <DependentUpon>Subjects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\Forms\Teachers.resx">
       <DependentUpon>Teachers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Forms\TeachersSubjects.resx">
+      <DependentUpon>TeachersSubjects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\Forms\TecherTime.resx">
       <DependentUpon>TecherTime.cs</DependentUpon>

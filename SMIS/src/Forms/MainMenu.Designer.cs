@@ -35,11 +35,13 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Groups = new System.Windows.Forms.Button();
             this.ViewUTime = new System.Windows.Forms.Button();
+            this.SubjectClasses = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Classes
             // 
-            this.Classes.Location = new System.Drawing.Point(423, 275);
+            this.Classes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Classes.Location = new System.Drawing.Point(115, 246);
             this.Classes.Name = "Classes";
             this.Classes.Size = new System.Drawing.Size(138, 49);
             this.Classes.TabIndex = 0;
@@ -49,16 +51,19 @@
             // 
             // SubjectTeachers
             // 
-            this.SubjectTeachers.Location = new System.Drawing.Point(423, 369);
+            this.SubjectTeachers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SubjectTeachers.Location = new System.Drawing.Point(115, 340);
             this.SubjectTeachers.Name = "SubjectTeachers";
             this.SubjectTeachers.Size = new System.Drawing.Size(138, 49);
             this.SubjectTeachers.TabIndex = 1;
             this.SubjectTeachers.Text = "Subjects Teachers";
             this.SubjectTeachers.UseVisualStyleBackColor = true;
+            this.SubjectTeachers.Click += new System.EventHandler(this.SubjectTeachers_Click);
             // 
             // Subjects
             // 
-            this.Subjects.Location = new System.Drawing.Point(758, 275);
+            this.Subjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Subjects.Location = new System.Drawing.Point(450, 246);
             this.Subjects.Name = "Subjects";
             this.Subjects.Size = new System.Drawing.Size(138, 49);
             this.Subjects.TabIndex = 2;
@@ -68,7 +73,8 @@
             // 
             // Teachers
             // 
-            this.Teachers.Location = new System.Drawing.Point(597, 275);
+            this.Teachers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Teachers.Location = new System.Drawing.Point(289, 246);
             this.Teachers.Name = "Teachers";
             this.Teachers.Size = new System.Drawing.Size(138, 49);
             this.Teachers.TabIndex = 3;
@@ -78,14 +84,15 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(488, 107);
+            this.progressBar1.Location = new System.Drawing.Point(180, 78);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(376, 83);
             this.progressBar1.TabIndex = 4;
             // 
             // Groups
             // 
-            this.Groups.Location = new System.Drawing.Point(597, 369);
+            this.Groups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Groups.Location = new System.Drawing.Point(289, 340);
             this.Groups.Name = "Groups";
             this.Groups.Size = new System.Drawing.Size(138, 49);
             this.Groups.TabIndex = 5;
@@ -95,18 +102,32 @@
             // 
             // ViewUTime
             // 
-            this.ViewUTime.Location = new System.Drawing.Point(758, 369);
+            this.ViewUTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ViewUTime.Location = new System.Drawing.Point(450, 340);
             this.ViewUTime.Name = "ViewUTime";
             this.ViewUTime.Size = new System.Drawing.Size(138, 49);
             this.ViewUTime.TabIndex = 6;
             this.ViewUTime.Text = "View Hours";
             this.ViewUTime.UseVisualStyleBackColor = true;
+            this.ViewUTime.Click += new System.EventHandler(this.ViewUTime_Click);
+            // 
+            // SubjectClasses
+            // 
+            this.SubjectClasses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SubjectClasses.Location = new System.Drawing.Point(289, 419);
+            this.SubjectClasses.Name = "SubjectClasses";
+            this.SubjectClasses.Size = new System.Drawing.Size(138, 49);
+            this.SubjectClasses.TabIndex = 7;
+            this.SubjectClasses.Text = "Subjects classes";
+            this.SubjectClasses.UseVisualStyleBackColor = true;
+            this.SubjectClasses.Click += new System.EventHandler(this.SubjectClasses_Click);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1287, 579);
+            this.ClientSize = new System.Drawing.Size(768, 525);
+            this.Controls.Add(this.SubjectClasses);
             this.Controls.Add(this.ViewUTime);
             this.Controls.Add(this.Groups);
             this.Controls.Add(this.progressBar1);
@@ -130,5 +151,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button Groups;
         private System.Windows.Forms.Button ViewUTime;
+        private System.Windows.Forms.Button SubjectClasses;
     }
 }

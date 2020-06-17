@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SMISSecurity;
-using SMIS.Schedualer;
+using SMIS.Scheduler;
 using SMIS.DataBase;
 using SMISInternal;
 
@@ -30,7 +30,8 @@ namespace SMIS
 
             Teacher[] teachers = ScheduleInit.GetTeachers();
 
-            foreach (Teacher t in teachers) {
+            foreach (Teacher t in teachers)
+            {
                 this.TeacherName.Items.Add(t.FirstName + " " + t.LastName);
             }
         }
@@ -44,7 +45,6 @@ namespace SMIS
 
         private bool EditRow(String name, String teacher, String grade)
         {
-
             int index = this.ClassesView.CurrentRow.Index;
             try
             {
@@ -71,6 +71,11 @@ namespace SMIS
 
         private void Add_Click(object sender, EventArgs e)
         {
+            if (this.smisDataSet.HasChanges())
+            {
+                this.smisDataSet.AcceptChanges();
+            }
+
             if (!Field.Valid(this.TeacherName.Text, this.ClassName.Text, this.Grade.Text))
             {
                 Errors.DisplayMinor("One or more input fields are empty");
@@ -94,11 +99,10 @@ namespace SMIS
             }
 
             this.classesTableAdapter.Update(this.smisDataSet.Classes);
-
-            this.smisDataSet.AcceptChanges();
         }
 
-        private bool TeacherOccupy(String teacher_name) {
+        private bool TeacherOccupy(String teacher_name)
+        {
 
             foreach (DataGridViewRow row in ClassesView.Rows)
             {
@@ -107,7 +111,7 @@ namespace SMIS
                     row.Cells[1].Style.BackColor = Color.Red;
                     return true;
                 }
-                
+
             }
 
             return false;
