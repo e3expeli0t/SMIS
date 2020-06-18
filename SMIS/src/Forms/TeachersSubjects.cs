@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 using SMISSecurity;
@@ -66,6 +61,8 @@ namespace SMIS
         {
             // TODO: This line of code loads data into the 'smisDataSet.Teachers_Subjects' table. You can move, or remove it, as needed.
             this.teachers_SubjectsTableAdapter.Fill(this.smisDataSet.Teachers_Subjects);
+            // TODO: This line of code loads data into the 'smisDataSet.Teachers_Subjects' table. You can move, or remove it, as needed.
+            teachers_SubjectsTableAdapter.Fill(this.smisDataSet.Teachers_Subjects);
         }
 
         private void DoEdit_Click(object sender, EventArgs e)

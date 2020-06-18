@@ -460,7 +460,7 @@ namespace SMIS {
             this.Relations.Add(this.relationSubjectsSubjects_Classes);
             this.relationSubjectsTeachers_Subjects = new global::System.Data.DataRelation("SubjectsTeachers_Subjects", new global::System.Data.DataColumn[] {
                         this.tableSubjects.LIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableTeachers_Subjects.SubjectNameColumn}, false);
+                        this.tableTeachers_Subjects.SubjectIDColumn}, false);
             this.Relations.Add(this.relationSubjectsTeachers_Subjects);
             this.relationTeachersTeachers_Subjects = new global::System.Data.DataRelation("TeachersTeachers_Subjects", new global::System.Data.DataColumn[] {
                         this.tableTeachers.TeacherIDColumn}, new global::System.Data.DataColumn[] {
@@ -2793,7 +2793,7 @@ namespace SMIS {
             
             private global::System.Data.DataColumn columnID;
             
-            private global::System.Data.DataColumn columnSubjectName;
+            private global::System.Data.DataColumn columnSubjectID;
             
             private global::System.Data.DataColumn columnTeacherID;
             
@@ -2840,9 +2840,9 @@ namespace SMIS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn SubjectNameColumn {
+            public global::System.Data.DataColumn SubjectIDColumn {
                 get {
-                    return this.columnSubjectName;
+                    return this.columnSubjectID;
                 }
             }
             
@@ -2933,7 +2933,7 @@ namespace SMIS {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnID = base.Columns["ID"];
-                this.columnSubjectName = base.Columns["SubjectName"];
+                this.columnSubjectID = base.Columns["SubjectID"];
                 this.columnTeacherID = base.Columns["TeacherID"];
             }
             
@@ -2942,8 +2942,8 @@ namespace SMIS {
             private void InitClass() {
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
-                this.columnSubjectName = new global::System.Data.DataColumn("SubjectName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnSubjectName);
+                this.columnSubjectID = new global::System.Data.DataColumn("SubjectID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubjectID);
                 this.columnTeacherID = new global::System.Data.DataColumn("TeacherID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTeacherID);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -2953,7 +2953,7 @@ namespace SMIS {
                 this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
                 this.columnID.Unique = true;
-                this.columnSubjectName.MaxLength = 255;
+                this.columnSubjectID.MaxLength = 255;
                 this.columnTeacherID.MaxLength = 255;
             }
             
@@ -4386,17 +4386,17 @@ namespace SMIS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string SubjectName {
+            public string SubjectID {
                 get {
                     try {
-                        return ((string)(this[this.tableTeachers_Subjects.SubjectNameColumn]));
+                        return ((string)(this[this.tableTeachers_Subjects.SubjectIDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SubjectName\' in table \'Teachers_Subjects\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SubjectID\' in table \'Teachers_Subjects\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableTeachers_Subjects.SubjectNameColumn] = value;
+                    this[this.tableTeachers_Subjects.SubjectIDColumn] = value;
                 }
             }
             
@@ -4440,14 +4440,14 @@ namespace SMIS {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsSubjectNameNull() {
-                return this.IsNull(this.tableTeachers_Subjects.SubjectNameColumn);
+            public bool IsSubjectIDNull() {
+                return this.IsNull(this.tableTeachers_Subjects.SubjectIDColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetSubjectNameNull() {
-                this[this.tableTeachers_Subjects.SubjectNameColumn] = global::System.Convert.DBNull;
+            public void SetSubjectIDNull() {
+                this[this.tableTeachers_Subjects.SubjectIDColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7890,37 +7890,37 @@ namespace SMIS.SmisDataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Teachers_Subjects";
             tableMapping.ColumnMappings.Add("ID", "ID");
-            tableMapping.ColumnMappings.Add("SubjectName", "SubjectName");
+            tableMapping.ColumnMappings.Add("SubjectID", "SubjectID");
             tableMapping.ColumnMappings.Add("TeacherID", "TeacherID");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM `Teachers_Subjects` WHERE ((`ID` = ?) AND ((? = 1 AND `SubjectName` I" +
-                "S NULL) OR (`SubjectName` = ?)) AND ((? = 1 AND `TeacherID` IS NULL) OR (`Teache" +
-                "rID` = ?)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM `Teachers_Subjects` WHERE ((`ID` = ?) AND ((? = 1 AND `SubjectID` IS " +
+                "NULL) OR (`SubjectID` = ?)) AND ((? = 1 AND `TeacherID` IS NULL) OR (`TeacherID`" +
+                " = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_SubjectName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_SubjectName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectName", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_SubjectID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_SubjectID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_TeacherID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TeacherID", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_TeacherID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TeacherID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `Teachers_Subjects` (`SubjectName`, `TeacherID`) VALUES (?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `Teachers_Subjects` (`SubjectID`, `TeacherID`) VALUES (?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SubjectName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectName", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SubjectID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TeacherID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TeacherID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE `Teachers_Subjects` SET `SubjectName` = ?, `TeacherID` = ? WHERE ((`ID` = " +
-                "?) AND ((? = 1 AND `SubjectName` IS NULL) OR (`SubjectName` = ?)) AND ((? = 1 AN" +
-                "D `TeacherID` IS NULL) OR (`TeacherID` = ?)))";
+            this._adapter.UpdateCommand.CommandText = "UPDATE `Teachers_Subjects` SET `SubjectID` = ?, `TeacherID` = ? WHERE ((`ID` = ?)" +
+                " AND ((? = 1 AND `SubjectID` IS NULL) OR (`SubjectID` = ?)) AND ((? = 1 AND `Tea" +
+                "cherID` IS NULL) OR (`TeacherID` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SubjectName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectName", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SubjectID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TeacherID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TeacherID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_SubjectName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_SubjectName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectName", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_SubjectID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_SubjectID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SubjectID", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_TeacherID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TeacherID", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_TeacherID", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TeacherID", global::System.Data.DataRowVersion.Original, false, null));
         }
@@ -7938,7 +7938,7 @@ namespace SMIS.SmisDataSetTableAdapters {
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT ID, SubjectName, TeacherID FROM Teachers_Subjects";
+            this._commandCollection[0].CommandText = "SELECT ID, SubjectID, TeacherID FROM Teachers_Subjects";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7999,15 +7999,15 @@ namespace SMIS.SmisDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ID, string Original_SubjectName, string Original_TeacherID) {
+        public virtual int Delete(int Original_ID, string Original_SubjectID, string Original_TeacherID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ID));
-            if ((Original_SubjectName == null)) {
+            if ((Original_SubjectID == null)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_SubjectName));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_SubjectID));
             }
             if ((Original_TeacherID == null)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
@@ -8037,12 +8037,12 @@ namespace SMIS.SmisDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string SubjectName, string TeacherID) {
-            if ((SubjectName == null)) {
+        public virtual int Insert(string SubjectID, string TeacherID) {
+            if ((SubjectID == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(SubjectName));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(SubjectID));
             }
             if ((TeacherID == null)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -8070,12 +8070,12 @@ namespace SMIS.SmisDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string SubjectName, string TeacherID, int Original_ID, string Original_SubjectName, string Original_TeacherID) {
-            if ((SubjectName == null)) {
+        public virtual int Update(string SubjectID, string TeacherID, int Original_ID, string Original_SubjectID, string Original_TeacherID) {
+            if ((SubjectID == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(SubjectName));
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(SubjectID));
             }
             if ((TeacherID == null)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
@@ -8084,13 +8084,13 @@ namespace SMIS.SmisDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(TeacherID));
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_ID));
-            if ((Original_SubjectName == null)) {
+            if ((Original_SubjectID == null)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_SubjectName));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_SubjectID));
             }
             if ((Original_TeacherID == null)) {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));

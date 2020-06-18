@@ -27,11 +27,6 @@ namespace SMIS
             InitializeComponent();
         }
 
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-
-        }
-
         //todo: add login support
         private void login()
         {

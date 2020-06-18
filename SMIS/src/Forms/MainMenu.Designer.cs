@@ -136,8 +136,7 @@
             this.Controls.Add(this.SubjectTeachers);
             this.Controls.Add(this.Classes);
             this.Name = "MainMenu";
-            this.Text = "textt";
-            this.Load += new System.EventHandler(this.MainMenu_Load);
+            this.Text = "SMIS";
             this.ResumeLayout(false);
 
         }

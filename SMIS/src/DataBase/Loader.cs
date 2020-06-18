@@ -190,14 +190,21 @@ namespace SMIS.DataBase
         {
             SmisDataSet ds = new SmisDataSet();
             SubjectsTableAdapter subject_table = new SubjectsTableAdapter();
+            Subjects_ClassesTableAdapter sc_table = new Subjects_ClassesTableAdapter();
+
 
             subject_table.Fill(ds.Subjects);
-
-            List<Subject> subjects = new List<Subject>();
+            sc_table.Fill(ds.Subjects_Classes);
 
             if (!ds.Subjects.Any())
             {
                 Errors.DisplayMajor("Database didn't load properly.\nOr there is no subjects to load, please try reloading the application or adding subjects");
+            }
+
+            if (!ds.Subjects_Classes.Any())
+            {
+                Errors.DisplayMajor("Database didn't load properly.\nOr subjects-classes relations dont exists, please try reloading the application or adding these relations");
+
             }
 
             if (ds.HasChanges())
@@ -205,16 +212,31 @@ namespace SMIS.DataBase
                 ds.AcceptChanges();
             }
 
-            foreach (DataRow dr in ds.Subjects.Rows)
-            {
-                subjects.Add(
-                         Subject.Construct(dr[1].ToString(), dr[0].ToString())
+            Dictionary<String, Subject> subject_map = new Dictionary<string, Subject>();
+
+            int SUBJECT_NAME = 1;
+            int SUBJECT_ID = 0;
+
+            int SC_CLASS_NAME = 2;
+            int SC_SUBJECT_NAME =  1;
+            int SC_TIME = 3;
+
+
+            foreach (DataRow dr in ds.Subjects.Rows) {
+                subject_map.Add(dr[SUBJECT_ID].ToString(),
+                        Subject.ConstructBasic(dr[SUBJECT_NAME].ToString(), dr[SUBJECT_ID].ToString())
                     );
             }
 
-            Asserts.ASSERT(subjects.Any(), "Empty datatable");
+            foreach (DataRow sc_dr in ds.Subjects_Classes) {
+                String name = sc_dr[SC_SUBJECT_NAME].ToString();
+                subject_map[name].TotalTime = sc_dr[SC_TIME].ToString();
+                subject_map[name].ClassId = sc_dr[SC_CLASS_NAME].ToString();
+            }
 
-            return subjects.ToArray();
+            Asserts.ASSERT(subject_map.Any(), "Empty datatable");
+
+            return subject_map.Values.ToArray();
         }
 
         public static SmisDataSet.SubjectsRow GetSubjectRow(String id)
@@ -233,6 +255,36 @@ namespace SMIS.DataBase
             foreach (SmisDataSet.SubjectsRow r in ds.Subjects.Rows)
             {
                 if (r.LID == id)
+                {
+                    return r;
+                }
+            }
+
+            return null;
+        }
+
+        public static SmisDataSet.Subjects_ClassesRow GetSubjectClassRow(String id)
+        {
+
+            SmisDataSet ds = new SmisDataSet();
+            Subjects_ClassesTableAdapter sc_table = new Subjects_ClassesTableAdapter();
+
+            sc_table.Fill(ds.Subjects_Classes);
+
+            if (!ds.Subjects_Classes.Any())
+            {
+                Errors.DisplayMajor("Database didn't load properly.\nOr subjects-classes relations dont exists, please try reloading the application or adding these relations");
+
+            }
+
+            if (ds.HasChanges())
+            {
+                ds.AcceptChanges();
+            }
+
+            foreach (SmisDataSet.Subjects_ClassesRow r in ds.Subjects_Classes.Rows)
+            {
+                if (r.Subject == id)
                 {
                     return r;
                 }

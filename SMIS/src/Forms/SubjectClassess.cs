@@ -88,6 +88,10 @@ namespace SMIS
                 return;
             }
 
+            if (total <= 0) {
+                return;
+            }
+
             SmisDataSet.SubjectsRow subject_row = ScheduleInit.GetSubjectRow(this.subject_id_map[this.SubjectSelector.Text]);
 
             if (subject_row == null) {

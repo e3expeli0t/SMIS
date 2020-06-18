@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.GroupsView = new System.Windows.Forms.DataGridView();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.classCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.availableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,10 +44,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Duration = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.SubjectSelector = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Schedualed = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.DoRemove = new System.Windows.Forms.Button();
             this.DoAdd = new System.Windows.Forms.Button();
@@ -55,30 +55,32 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.PossibleTime = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.GroupsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // GroupsView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.GroupsView.AllowUserToAddRows = false;
+            this.GroupsView.AllowUserToDeleteRows = false;
+            this.GroupsView.AutoGenerateColumns = false;
+            this.GroupsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GroupsView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn,
             this.classCodeDataGridViewTextBoxColumn,
             this.availableDataGridViewTextBoxColumn,
             this.scheduledDataGridViewTextBoxColumn,
             this.teachersCodeDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.groupsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 33);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(543, 242);
-            this.dataGridView1.TabIndex = 0;
+            this.GroupsView.DataSource = this.groupsBindingSource;
+            this.GroupsView.Location = new System.Drawing.Point(12, 33);
+            this.GroupsView.Name = "GroupsView";
+            this.GroupsView.ReadOnly = true;
+            this.GroupsView.Size = new System.Drawing.Size(543, 242);
+            this.GroupsView.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -180,13 +182,14 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Duration";
             // 
-            // textBox1
+            // Duration
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(67, 395);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
+            this.Duration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Duration.Location = new System.Drawing.Point(67, 395);
+            this.Duration.Name = "Duration";
+            this.Duration.Size = new System.Drawing.Size(100, 20);
+            this.Duration.TabIndex = 7;
+            this.Duration.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Duration_KeyPress);
             // 
             // label4
             // 
@@ -205,16 +208,17 @@
             this.SubjectSelector.Name = "SubjectSelector";
             this.SubjectSelector.Size = new System.Drawing.Size(121, 21);
             this.SubjectSelector.TabIndex = 8;
+            this.SubjectSelector.SelectedIndexChanged += new System.EventHandler(this.SubjectSelector_SelectedIndexChanged);
             // 
-            // textBox2
+            // Schedualed
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(268, 347);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Visible = false;
+            this.Schedualed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Schedualed.Enabled = false;
+            this.Schedualed.Location = new System.Drawing.Point(268, 347);
+            this.Schedualed.Name = "Schedualed";
+            this.Schedualed.Size = new System.Drawing.Size(121, 20);
+            this.Schedualed.TabIndex = 11;
+            this.Schedualed.Visible = false;
             // 
             // label5
             // 
@@ -245,6 +249,7 @@
             this.DoAdd.TabIndex = 13;
             this.DoAdd.Text = "Add";
             this.DoAdd.UseVisualStyleBackColor = true;
+            this.DoAdd.Click += new System.EventHandler(this.DoAdd_Click);
             // 
             // DoReSched
             // 
@@ -261,6 +266,7 @@
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox3.Location = new System.Drawing.Point(268, 391);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(121, 20);
             this.textBox3.TabIndex = 16;
             // 
@@ -273,31 +279,53 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Search";
             // 
+            // PossibleTime
+            // 
+            this.PossibleTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PossibleTime.Cursor = System.Windows.Forms.Cursors.No;
+            this.PossibleTime.Location = new System.Drawing.Point(245, 4);
+            this.PossibleTime.MaxLength = 10;
+            this.PossibleTime.Name = "PossibleTime";
+            this.PossibleTime.ReadOnly = true;
+            this.PossibleTime.Size = new System.Drawing.Size(88, 20);
+            this.PossibleTime.TabIndex = 17;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(171, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Possible time";
+            // 
             // Groups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 496);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.PossibleTime);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.DoReSched);
             this.Controls.Add(this.DoAdd);
             this.Controls.Add(this.DoRemove);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.Schedualed);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.SubjectSelector);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Duration);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ClassSelector);
             this.Controls.Add(this.TeacherSelector);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.GroupsView);
             this.Name = "Groups";
             this.Text = "Groups";
             this.Load += new System.EventHandler(this.Groups_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GroupsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
@@ -308,7 +336,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView GroupsView;
         private System.Windows.Forms.BindingSource smisDataSetBindingSource;
         private SmisDataSet smisDataSet;
         private System.Windows.Forms.BindingSource groupsBindingSource;
@@ -323,10 +351,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox Duration;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox SubjectSelector;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox Schedualed;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button DoRemove;
         private System.Windows.Forms.Button DoAdd;
@@ -334,5 +362,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label6;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox PossibleTime;
     }
 }

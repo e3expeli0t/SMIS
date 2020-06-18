@@ -7,6 +7,7 @@ namespace SMIS.Scheduler
 {
     class Class
     {
+        //todo: replace teacher with teacher_id
         Teacher teacher;
         String grade;
         String name;

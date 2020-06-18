@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SMISSecurity;
+using SMISInternal;
+
+
 namespace SMIS
 {
     static class Program
@@ -22,7 +25,19 @@ namespace SMIS
 
 
             if (lform.Success()) {
-                Application.Run(new MainMenu());
+                try
+                {
+                    Application.Run(new MainMenu());
+                }
+                catch (Exception e)
+                {
+                    
+                    Errors.DisplayMajor("An error acoured. Reseting...\nError: " + e.Message);
+                }
+                finally
+                {
+                    Application.Run(new MainMenu());
+                }
             } else {
                 //todo: Error handling
             }
