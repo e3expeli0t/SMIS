@@ -19,11 +19,18 @@ namespace SMIS
         {
             InitializeComponent();
             Teacher[] teachers = ScheduleInit.GetTeachers();
+            int dup_count = 0;
 
             foreach (Teacher t in teachers)
             {
-                this.id_map.Add(t.FirstName + " " + t.LastName, t.Id);
-                this.TeacherSelector.Items.Add(t.FirstName + " " + t.LastName);
+                String name = t.FirstName + " " + t.LastName;
+                if (id_map.ContainsKey(t.FirstName + " " + t.LastName)) {
+                    name += "_" + dup_count;
+                    dup_count++;
+
+                }
+                this.id_map.Add(name, t.Id);
+                this.TeacherSelector.Items.Add(name);
             }
         }
 
@@ -42,7 +49,7 @@ namespace SMIS
                 this.unavailableTimeBindingSource.RemoveFilter();
             }
             else {
-                this.unavailableTimeBindingSource.Filter = String.Format("TeacherID='{}'", this.id_map[name]);
+                this.unavailableTimeBindingSource.Filter = String.Format("TeacherID='{0}'", this.id_map[name]);
             }
         }
 

@@ -45,9 +45,6 @@ namespace SMIS
             this.teachersTableAdapter.Fill(this.smisDataSet.Teachers);
         }
 
-
-        //----------------------------------------------------------------------------------------------------------------
-
         private Dictionary<String, String> parseName()
         {
             String[] names = this.TeacherName.Text.Split(' ', '\t');

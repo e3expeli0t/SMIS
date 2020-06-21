@@ -37,17 +37,17 @@
             this.SubjectSelection = new System.Windows.Forms.ComboBox();
             this.DoEdit = new System.Windows.Forms.Button();
             this.TeachersSubjectsView = new System.Windows.Forms.DataGridView();
-            this.smisDataSet = new SMIS.SmisDataSet();
-            this.smisDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.teachersSubjectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.teachers_SubjectsTableAdapter = new SMIS.SmisDataSetTableAdapters.Teachers_SubjectsTableAdapter();
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SubjectIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.teacherIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.teachersSubjectsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.smisDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.smisDataSet = new SMIS.SmisDataSet();
+            this.teachers_SubjectsTableAdapter = new SMIS.SmisDataSetTableAdapters.Teachers_SubjectsTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.TeachersSubjectsView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachersSubjectsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // DoAdd
@@ -64,7 +64,7 @@
             // DoRemove
             // 
             this.DoRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoRemove.Location = new System.Drawing.Point(214, 191);
+            this.DoRemove.Location = new System.Drawing.Point(214, 204);
             this.DoRemove.Name = "DoRemove";
             this.DoRemove.Size = new System.Drawing.Size(82, 23);
             this.DoRemove.TabIndex = 2;
@@ -111,7 +111,7 @@
             // DoEdit
             // 
             this.DoEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoEdit.Location = new System.Drawing.Point(214, 191);
+            this.DoEdit.Location = new System.Drawing.Point(214, 175);
             this.DoEdit.Name = "DoEdit";
             this.DoEdit.Size = new System.Drawing.Size(82, 23);
             this.DoEdit.TabIndex = 7;
@@ -134,25 +134,6 @@
             this.TeachersSubjectsView.Size = new System.Drawing.Size(342, 139);
             this.TeachersSubjectsView.TabIndex = 8;
             // 
-            // smisDataSet
-            // 
-            this.smisDataSet.DataSetName = "SmisDataSet";
-            this.smisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // smisDataSetBindingSource
-            // 
-            this.smisDataSetBindingSource.DataSource = this.smisDataSet;
-            this.smisDataSetBindingSource.Position = 0;
-            // 
-            // teachersSubjectsBindingSource
-            // 
-            this.teachersSubjectsBindingSource.DataMember = "Teachers_Subjects";
-            this.teachersSubjectsBindingSource.DataSource = this.smisDataSetBindingSource;
-            // 
-            // teachers_SubjectsTableAdapter
-            // 
-            this.teachers_SubjectsTableAdapter.ClearBeforeFill = true;
-            // 
             // iDDataGridViewTextBoxColumn
             // 
             this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
@@ -171,6 +152,25 @@
             this.teacherIDDataGridViewTextBoxColumn.HeaderText = "TeacherID";
             this.teacherIDDataGridViewTextBoxColumn.Name = "teacherIDDataGridViewTextBoxColumn";
             // 
+            // teachersSubjectsBindingSource
+            // 
+            this.teachersSubjectsBindingSource.DataMember = "Teachers_Subjects";
+            this.teachersSubjectsBindingSource.DataSource = this.smisDataSetBindingSource;
+            // 
+            // smisDataSetBindingSource
+            // 
+            this.smisDataSetBindingSource.DataSource = this.smisDataSet;
+            this.smisDataSetBindingSource.Position = 0;
+            // 
+            // smisDataSet
+            // 
+            this.smisDataSet.DataSetName = "SmisDataSet";
+            this.smisDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // teachers_SubjectsTableAdapter
+            // 
+            this.teachers_SubjectsTableAdapter.ClearBeforeFill = true;
+            // 
             // TeachersSubjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -188,9 +188,9 @@
             this.Text = "Teachers subject chooser";
             this.Load += new System.EventHandler(this.TeachersSubjects_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TeachersSubjectsView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.teachersSubjectsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.smisDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

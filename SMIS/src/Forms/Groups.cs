@@ -16,6 +16,7 @@ namespace SMIS
 {
     public partial class Groups : Form
     {
+        private ScheduleInit pre_scheduler = new ScheduleInit(true);
         private Dictionary<String, String> id_map = new Dictionary<String, String>();
         private Dictionary<String, String> class_map = new Dictionary<String, String>();
         private Dictionary<String, Subject> subject_map = new Dictionary<String, Subject>();
@@ -33,7 +34,7 @@ namespace SMIS
 
             // Fill all the ComboBoxes
 
-            Teacher[] teachers = ScheduleInit.GetTeachers();
+            Teacher[] teachers = pre_scheduler.LoadTeachers();
             Dictionary<String, Teacher> name_map = new Dictionary<string, Teacher>();
 
             //Note: there is big problem since in the classes form we are using
@@ -45,7 +46,7 @@ namespace SMIS
                 name_map.Add(t.FirstName + " " + t.LastName, t);
             }
 
-            Class[] classes = ScheduleInit.GetClasses(name_map);
+            Class[] classes = this.pre_scheduler.LoadClasses(name_map);
 
             foreach (Class c in classes)
             {
@@ -53,14 +54,15 @@ namespace SMIS
                 this.ClassSelector.Items.Add(c.Name);
             }
 
-            Subject[] subjects = ScheduleInit.GetSubjects();
+            Subject[] subjects = this.pre_scheduler.LoadSubjects();
 
-            foreach (Subject s in subjects) {
+            foreach (Subject s in subjects)
+            {
                 this.SubjectSelector.Items.Add(s.Name);
                 this.subject_map.Add(s.Name, s);
             }
 
-
+            this.classes = this.pre_scheduler.SetSubjectsClasses(classes, subjects);
             this.subjects = subjects;
             Cursor.Current = Cursors.Default;
         }
@@ -71,42 +73,81 @@ namespace SMIS
             this.groupsTableAdapter.Fill(this.smisDataSet.Groups);
         }
 
-        private void ClassSelector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.TeacherSelector.Text = this.class_map[this.ClassSelector.Text];
-        }
-
         private void DoAdd_Click(object sender, EventArgs e)
         {
-            String subject_name = this.SubjectSelector.Text;
-
-            int asked_duration = 0;
-            int.TryParse(this.Duration.Text, out asked_duration);
-
-            Subject s;
-            if (!this.getSubjectByName(subject_name, out s)) {
-                Errors.DisplayMajor("Internal error: Couldn't locate subject.\n Try reloading the application");
+            //Asserts.ASSERT_NOT_REACHED();
+            if (this.TeacherSelector.SelectedIndex < 0)
+            {
+                Errors.DisplayMinor("Please select teacher");
                 return;
             }
 
-            int possible_time = Convert.ToInt32(s.TotalTime);
+            if (this.SubjectSelector.SelectedIndex < 0)
+            {
+                Errors.DisplayMinor("Please select subject");
+                return;
+            }
 
-            if ( possible_time < asked_duration) {
-                Errors.DisplayMinor(String.Format("Duration can't be bigger then: {}", possible_time.ToString()));
+            if (this.ClassSelector.SelectedIndex < 0)
+            {
+                Errors.DisplayMinor("Please select class");
+                return;
+            }
+
+            String class_name = this.ClassSelector.Text;
+
+            int asked_duration = 0;
+            int.TryParse(this.Duration.Text, out asked_duration);
+            if (asked_duration == 0)
+            {
+                Errors.DisplayMinor("Please choose duration");
+                return;
+            }
+
+            Class c;
+            if (!this.getClassByName(class_name, out c))
+            {
+                Errors.DisplayMajor("Internal error: Couldn't locate class.\n Try reloading the application");
+                return;
+            }
+
+            Subject current_subject = c.GetSubject(this.SubjectSelector.Text);
+            if (current_subject == null)
+            {
+                Errors.DisplayMinor("Class don't have this subject assigned");
                 return;
             }
 
             String teacher_name = this.TeacherSelector.Text;
-            SmisDataSet.TeachersRow teacher_row = ScheduleInit.GetTeacherRow(this.id_map[teacher_name]);
-            SmisDataSet.Subjects_ClassesRow subject_row  = ScheduleInit.GetSubjectClassRow(subject_name);
+            if (!current_subject.HasTeacherAssigned(this.id_map[teacher_name]))
+            {
+                Errors.DisplayMinor(String.Format("The teacher '{0}' can't teach subject '{1}'", teacher_name, current_subject.Name));
+                return;
+            }
 
-            Asserts.ASSERT(teacher_row != null && subject_row != null, "Error while loading Tables\n try restarting the application");
+            int possible_time = Convert.ToInt32(current_subject.TotalTime);
+            
+            if (possible_time < asked_duration)
+            {
+                Errors.DisplayMinor(String.Format("Duration can't be bigger then: {0}", possible_time.ToString()));
+                return;
+            }
+            
+
+            SmisDataSet.TeachersRow teacher_row = this.pre_scheduler.LoadTeacherRow(
+                    this.id_map[teacher_name]
+                );
+            SmisDataSet.Subjects_ClassesRow subject_row = this.pre_scheduler.LoadSubjectClassRow(class_name);
+
+            Asserts.ASSERT(teacher_row != null || subject_row != null, "Error while loading Tables\n try restarting the application");
 
             this.smisDataSet.Groups.AddGroupsRow(
-                subject_row,
-                (possible_time - asked_duration).ToString(),
-                asked_duration.ToString(),
-                teacher_row);            
+                    subject_row,
+                    (possible_time - asked_duration).ToString(),
+                    asked_duration.ToString(),
+                    teacher_row
+                );
+            this.groupsTableAdapter.Update(this.smisDataSet.Groups);
         }
 
         private void Duration_KeyPress(object sender, KeyPressEventArgs e)
@@ -124,11 +165,14 @@ namespace SMIS
             }
         }
 
-        private Boolean getSubjectByName(string name, out Subject s) {
-            foreach (Subject sub in this.subjects) {
-                if (sub.Name == name) {
+        private Boolean getClassByName(string name, out Class s)
+        {
+            foreach (Class c in this.classes)
+            {
+                if (c.Name == name)
+                {
 
-                    s = sub;
+                    s = c; ;
                     return true;
                 }
             }
@@ -140,6 +184,11 @@ namespace SMIS
         private void SubjectSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.PossibleTime.Text = this.subject_map[this.SubjectSelector.Text].TotalTime;
+        }
+
+        private void ClassSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -58,10 +58,10 @@
             this.lIDDataGridViewTextBoxColumn,
             this.lNameDataGridViewTextBoxColumn});
             this.SubjectsView.DataSource = this.subjectsBindingSource;
-            this.SubjectsView.Location = new System.Drawing.Point(12, 12);
+            this.SubjectsView.Location = new System.Drawing.Point(35, 12);
             this.SubjectsView.Name = "SubjectsView";
             this.SubjectsView.ReadOnly = true;
-            this.SubjectsView.Size = new System.Drawing.Size(245, 132);
+            this.SubjectsView.Size = new System.Drawing.Size(245, 145);
             this.SubjectsView.TabIndex = 1;
             this.SubjectsView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SubjectsView_CellClick);
             // 
@@ -70,12 +70,14 @@
             this.lIDDataGridViewTextBoxColumn.DataPropertyName = "LID";
             this.lIDDataGridViewTextBoxColumn.HeaderText = "LID";
             this.lIDDataGridViewTextBoxColumn.Name = "lIDDataGridViewTextBoxColumn";
+            this.lIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // lNameDataGridViewTextBoxColumn
             // 
             this.lNameDataGridViewTextBoxColumn.DataPropertyName = "LName";
             this.lNameDataGridViewTextBoxColumn.HeaderText = "LName";
             this.lNameDataGridViewTextBoxColumn.Name = "lNameDataGridViewTextBoxColumn";
+            this.lNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // subjectsBindingSource
             // 
@@ -110,7 +112,7 @@
             // DoEdit
             // 
             this.DoEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoEdit.Location = new System.Drawing.Point(164, 205);
+            this.DoEdit.Location = new System.Drawing.Point(111, 205);
             this.DoEdit.Name = "DoEdit";
             this.DoEdit.Size = new System.Drawing.Size(93, 33);
             this.DoEdit.TabIndex = 3;
@@ -121,7 +123,7 @@
             // 
             // Subject
             // 
-            this.Subject.Location = new System.Drawing.Point(92, 163);
+            this.Subject.Location = new System.Drawing.Point(115, 163);
             this.Subject.Name = "Subject";
             this.Subject.Size = new System.Drawing.Size(100, 20);
             this.Subject.TabIndex = 4;
@@ -130,7 +132,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(51, 163);
+            this.label1.Location = new System.Drawing.Point(74, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 5;
@@ -139,18 +141,19 @@
             // DoRemove
             // 
             this.DoRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoRemove.Location = new System.Drawing.Point(164, 205);
+            this.DoRemove.Location = new System.Drawing.Point(210, 205);
             this.DoRemove.Name = "DoRemove";
             this.DoRemove.Size = new System.Drawing.Size(93, 33);
             this.DoRemove.TabIndex = 6;
             this.DoRemove.Text = "Delete";
             this.DoRemove.UseVisualStyleBackColor = false;
+            this.DoRemove.Click += new System.EventHandler(this.DoRemove_Click);
             // 
             // Subjects
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(278, 255);
+            this.ClientSize = new System.Drawing.Size(311, 258);
             this.Controls.Add(this.DoRemove);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Subject);

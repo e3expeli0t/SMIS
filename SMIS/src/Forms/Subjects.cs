@@ -15,6 +15,7 @@ namespace SMIS
     {
 
         private int index = 0;
+        private bool edit_mode = false;
 
         public Subjects(AccessLevel level)
         {
@@ -58,6 +59,11 @@ namespace SMIS
             this.subjectsTableAdapter.Update(this.smisDataSet.Subjects);
         }
 
+        private void cancelEdit() {
+            this.edit_mode = false;
+            this.DoRemove.Text = "delete";
+            this.DoEdit.Visible = false;
+        }
         private bool SubjectOccupy(String subject_name)
         {
             if (this.SubjectsView.Rows.Count ==  0) {
@@ -78,10 +84,22 @@ namespace SMIS
 
         private void SubjectsView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.DoRemove.Visible = false;
+            this.DoRemove.Text = "cancel";
             this.DoEdit.Visible = true;
+            this.edit_mode = true;
             index = this.SubjectsView.CurrentRow.Index;
             this.fillFromRow();
+        }
+
+        private void DoRemove_Click(object sender, EventArgs e)
+        {
+            if (edit_mode) {
+                cancelEdit();
+                return;
+            }
+
+            this.smisDataSet.Subjects[this.SubjectsView.CurrentRow.Index].Delete();
+            this.subjectsTableAdapter.Update(this.smisDataSet.Subjects);
         }
     }
 }

@@ -67,5 +67,20 @@ namespace SMIS
         {
             new SubjectClassess().ShowDialog();
         }
+
+        private void SetupSG_Click(object sender, EventArgs e)
+        {
+            new SetupStudyGroup(AdminAccsess).Show();
+        }
+
+        private void AddGrade_Click(object sender, EventArgs e)
+        {
+            new Grade().ShowDialog();
+        }
+
+        private void ViewSchedule_Click(object sender, EventArgs e)
+        {
+            new Schedule().ShowDialog();
+        }
     }
 }

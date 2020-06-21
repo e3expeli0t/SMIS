@@ -8,21 +8,16 @@ namespace SMIS
 {
     public partial class TecherTime : Form
     {
-
+        private int max_hour = 11;
         private String ID;
-        
-        //Every 45 minutes there is break
-        private int max_hour = 19*60; // 19:00
-        private int min_hour = 8*90; // 8:00
-
 
         public TecherTime(String teacherID)
         {
             InitializeComponent();
             this.ID = teacherID;
 
-            for (int i = this.min_hour; i < this.max_hour; i += 45) {
-                this.TimeList.Items.Add(i/60);
+            for (int i = 0; i < this.max_hour; i++) {
+                this.TimeList.Items.Add(i);
             }
         }
 

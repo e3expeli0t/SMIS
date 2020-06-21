@@ -9,8 +9,10 @@ namespace SMIS.Scheduler
     {
         private String firstName;
         private String lastName;
+        private String full_name;
         private String id;
-        private DateTime[] preferdTime;
+
+        private AvailableTime time = new AvailableTime(DefaultValues.Week);
         private Class[] classes;
         private Group[] groups;
 
@@ -22,9 +24,11 @@ namespace SMIS.Scheduler
 
         public Teacher(String fname, String lname, String id)
         {
+            this.Time = new AvailableTime(DefaultValues.Week);
             this.firstName = fname;
             this.lastName = lname;
-            this.preferdTime = null;
+            this.full_name = fname + " " + lname;
+            this.id = id;
             this.classes = null;
             this.groups = null;
         }
@@ -50,6 +54,18 @@ namespace SMIS.Scheduler
             }
         }
 
+        public String FullName
+        {
+            get
+            {
+                return this.full_name;
+            }
+            set
+            {
+                full_name = value;
+            }
+        }
+
         public String Id
         {
             get
@@ -58,15 +74,15 @@ namespace SMIS.Scheduler
             }
         }
 
-        public DateTime[] PreferdTime
+        public AvailableTime Time
         {
             get
             {
-                return this.preferdTime;
+                return this.time;
             }
             set
             {
-                preferdTime = value;
+                time = value;
             }
         }
 

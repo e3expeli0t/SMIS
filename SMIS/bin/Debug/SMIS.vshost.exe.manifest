@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SMIS.exe" size="749520">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SMIS.exe" size="764368">
       <assemblyIdentity name="SMIS" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>ekddXbPxAJ6NKC627PbvNH/UhsA=</dsig:DigestValue>
+        <dsig:DigestValue>+G4uRE3vizf2+Hbi4CLat9kc/OU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -68,7 +68,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>dk+4PI6/SCAMEkZoGE2zGvNg/rk=</dsig:DigestValue>
+      <dsig:DigestValue>BMsTcB3aS00Rlnig/pVeYnWiDeo=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

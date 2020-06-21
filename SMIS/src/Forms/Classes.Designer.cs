@@ -216,7 +216,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(374, 376);
+            this.ClientSize = new System.Drawing.Size(363, 376);
             this.Controls.Add(this.TeacherName);
             this.Controls.Add(this.ClassesView);
             this.Controls.Add(this.DoSearch);

@@ -12,8 +12,9 @@ namespace SMIS
 {
     public partial class TeachersSubjects : Form
     {
-        Dictionary<String, String> teacher_id_map = new Dictionary<String, String>();
-        Dictionary<String, String> subject_id_map = new Dictionary<String, String>();
+        private Dictionary<String, String> teacher_id_map = new Dictionary<String, String>();
+        private Dictionary<String, String> subject_id_map = new Dictionary<String, String>();
+        private bool edit_mode = false;
 
         public TeachersSubjects(AccessLevel level)
         {
@@ -61,8 +62,6 @@ namespace SMIS
         {
             // TODO: This line of code loads data into the 'smisDataSet.Teachers_Subjects' table. You can move, or remove it, as needed.
             this.teachers_SubjectsTableAdapter.Fill(this.smisDataSet.Teachers_Subjects);
-            // TODO: This line of code loads data into the 'smisDataSet.Teachers_Subjects' table. You can move, or remove it, as needed.
-            teachers_SubjectsTableAdapter.Fill(this.smisDataSet.Teachers_Subjects);
         }
 
         private void DoEdit_Click(object sender, EventArgs e)
@@ -75,7 +74,12 @@ namespace SMIS
 
         private void DoRemove_Click(object sender, EventArgs e)
         {
+            if (this.edit_mode) {
+                this.cancelEdit();
+            }
 
+            this.smisDataSet.Subjects[this.TeachersSubjectsView.CurrentRow.Index].Delete();
+            this.teachers_SubjectsTableAdapter.Update(this.smisDataSet.Teachers_Subjects);
         }
 
         private void DoAdd_Click(object sender, EventArgs e)
@@ -95,9 +99,18 @@ namespace SMIS
                 this.smisDataSet.AcceptChanges();
             }
 
-            MessageBox.Show(this.TeacherSelection.Text);
+            if (!this.teacher_id_map.ContainsKey(this.TeacherSelection.Text)) {
+                Errors.DisplayMajor(String.Format("Invalid teacher name: '{0}'", this.TeacherSelection.Text));
+            }
 
-            SmisDataSet.TeachersRow teacher_row = ScheduleInit.GetTeacherRow(this.teacher_id_map[this.TeacherSelection.Text]);
+            if (!this.subject_id_map.ContainsKey(this.SubjectSelection.Text))
+            {
+                Errors.DisplayMajor(String.Format("Invalid subject name: '{0}'", this.SubjectSelection.Text));
+            }
+            String teacher_name = this.TeacherSelection.Text;
+            String id = this.teacher_id_map[teacher_name];
+
+            SmisDataSet.TeachersRow teacher_row = ScheduleInit.GetTeacherRow(id);
             SmisDataSet.SubjectsRow subject_row = ScheduleInit.GetSubjectRow(this.subject_id_map[this.SubjectSelection.Text]);
 
             this.smisDataSet.Teachers_Subjects.AddTeachers_SubjectsRow(subject_row, teacher_row);
@@ -107,7 +120,14 @@ namespace SMIS
         private void TeacherSubjectsView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             this.DoEdit.Visible = true;
-            this.DoRemove.Visible = false;
+            this.DoRemove.Text = "Cancel editing";
+            this.edit_mode = true;
+        }
+
+        private void cancelEdit() {
+            this.edit_mode = false;
+            this.DoEdit.Visible = false;
+            this.DoRemove.Text = "Remove";
         }
     }
 }

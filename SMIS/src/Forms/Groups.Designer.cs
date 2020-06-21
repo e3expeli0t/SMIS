@@ -57,6 +57,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.PossibleTime = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.DoEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GroupsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.smisDataSetBindingSource)).BeginInit();
@@ -153,7 +154,6 @@
             this.ClassSelector.Name = "ClassSelector";
             this.ClassSelector.Size = new System.Drawing.Size(121, 21);
             this.ClassSelector.TabIndex = 2;
-            this.ClassSelector.SelectedIndexChanged += new System.EventHandler(this.ClassSelector_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -233,7 +233,7 @@
             // DoRemove
             // 
             this.DoRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoRemove.Location = new System.Drawing.Point(111, 448);
+            this.DoRemove.Location = new System.Drawing.Point(91, 440);
             this.DoRemove.Name = "DoRemove";
             this.DoRemove.Size = new System.Drawing.Size(76, 23);
             this.DoRemove.TabIndex = 12;
@@ -243,7 +243,7 @@
             // DoAdd
             // 
             this.DoAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DoAdd.Location = new System.Drawing.Point(207, 448);
+            this.DoAdd.Location = new System.Drawing.Point(187, 440);
             this.DoAdd.Name = "DoAdd";
             this.DoAdd.Size = new System.Drawing.Size(75, 23);
             this.DoAdd.TabIndex = 13;
@@ -299,11 +299,22 @@
             this.label7.TabIndex = 18;
             this.label7.Text = "Possible time";
             // 
+            // DoEdit
+            // 
+            this.DoEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DoEdit.Location = new System.Drawing.Point(278, 440);
+            this.DoEdit.Name = "DoEdit";
+            this.DoEdit.Size = new System.Drawing.Size(75, 23);
+            this.DoEdit.TabIndex = 19;
+            this.DoEdit.Text = "Edit";
+            this.DoEdit.UseVisualStyleBackColor = true;
+            // 
             // Groups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 496);
+            this.Controls.Add(this.DoEdit);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.PossibleTime);
             this.Controls.Add(this.textBox3);
@@ -364,5 +375,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox PossibleTime;
+        private System.Windows.Forms.Button DoEdit;
     }
 }

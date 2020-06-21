@@ -27,17 +27,15 @@ namespace SMIS
             if (lform.Success()) {
                 try
                 {
-                    Application.Run(new MainMenu());
+                    //
                 }
                 catch (Exception e)
                 {
                     
                     Errors.DisplayMajor("An error acoured. Reseting...\nError: " + e.Message);
                 }
-                finally
-                {
-                    Application.Run(new MainMenu());
-                }
+
+                Application.Run(new MainMenu());
             } else {
                 //todo: Error handling
             }

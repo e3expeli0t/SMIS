@@ -1,0 +1,8 @@
+
+* Add edting to teacher subjects
+* Add editing to subjects classess
+
+* Add schedualing algorithem
+* Add users
+* optiimize
+*Better global error handling
