@@ -43,6 +43,16 @@ namespace SMIS.Scheduler
             return this.free_map[hour_no];
         }
 
+        public bool isDayFree(Days day)
+        {
+            bool res = true;
+            foreach (bool b in this.free_map.Values) {
+                res = res && b;
+            }
+
+            return res;
+        }
+
         public void UnMark(int hour_no) {
             this.free_map[hour_no] = false;
             this.RemTick();

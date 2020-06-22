@@ -11,7 +11,7 @@ namespace SMIS.Scheduler
         private Class group_class;
         private Subject subject;
 
-        public static  Group Construct(Teacher teacher, Class c, Subject s)
+        public static Group Construct(Teacher teacher, Class c, Subject s)
         {
             return new Group(teacher, c, s);
         }
@@ -21,6 +21,16 @@ namespace SMIS.Scheduler
             this.group_class = c;
             this.subject = s;
             this.teacher = teacher;
+        }
+
+        public String ToString()
+        {
+            return String.Format(
+                "Teacher: {0}\nClass: {1}\nSubject: {2}",
+                 GroupTeacher.FullName,
+                 GroupClass.Name,
+                 GroupSubject.Name
+                 );
         }
 
         public Teacher GroupTeacher

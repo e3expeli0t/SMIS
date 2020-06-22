@@ -21,21 +21,19 @@ namespace SMIS
             
             SMISSecurity.Login lgn = new SMISSecurity.Login();
             Login lform = new Login();
-            //Application.Run(lform);
+            lform.ShowDialog();
 
 
             if (lform.Success()) {
                 try
                 {
-                    //
+                    Application.Run(new MainMenu());
                 }
                 catch (Exception e)
                 {
                     
                     Errors.DisplayMajor("An error acoured. Reseting...\nError: " + e.Message);
                 }
-
-                Application.Run(new MainMenu());
             } else {
                 //todo: Error handling
             }

@@ -20,9 +20,6 @@ namespace SMIS.Scheduler
             this.Week = new Days[] { Days.Sunday, Days.Monday, Days.Tuesday, Days.Wednesday, Days.Thursday, Days.Friday };
             this.loader = new ScheduleInit();
 
-            this.groups = this.loader.LoadGroups();
-            this.teachers = this.loader.LoadTeachers();
-            this.teachers = this.loader.LoadTime(this.teachers);
             try
             {
                 this.groups = this.loader.LoadGroups();
@@ -44,6 +41,7 @@ namespace SMIS.Scheduler
             ScheduledForm scheduled = new ScheduledForm(this.Week, hours_per_day);
             int current_group = 0;
             int day_hour_counter = 0;
+            int groups_count = this.groups.Count();
 
             foreach (Days day in this.Week)
             {
@@ -53,12 +51,19 @@ namespace SMIS.Scheduler
                     break;
                 }
 
-                while(!scheduled.GetDay(day).Full())
+                if (current_group > groups_count)
+                {
+                    break;
+                }
+
+                while(current_group < groups_count &&  !scheduled.GetDay(day).Full())
                 {
                     if (this.groups[current_group] == null)
                     {
                         break;
                     }
+
+
                     if (!this.groups[current_group].GroupTeacher.Time.GetUnAval()[day].IsHourFree(day_hour_counter))
                     {
                         day_hour_counter++;
@@ -67,6 +72,7 @@ namespace SMIS.Scheduler
 
                     scheduled.Add(day, day_hour_counter, this.groups[current_group]);
                     day_hour_counter++;
+                    current_group++;
                 }
             }
 

@@ -19,6 +19,11 @@ namespace SMIS.Scheduler
             this.name = d;
             this.max_cap = max_hour;
             this.current = 0;
+
+            for(int i = 0; i <= max_hour; i++)
+            {
+                this.assignd_map.Add(i, null);
+            } 
         }
 
         public Group GetByHour(int hour)

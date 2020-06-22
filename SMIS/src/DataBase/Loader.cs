@@ -125,7 +125,7 @@ namespace SMIS.DataBase
                 //Note: can be collisions
                 try
                 {
-                    id_map.Add(teacher.FirstName + " " + teacher.LastName, teacher);
+                    id_map.Add(teacher.FullName, teacher);
                 }
                 catch (Exception e)
                 {
@@ -141,10 +141,11 @@ namespace SMIS.DataBase
 
             foreach (SmisDataSet.GroupsRow group_row in this.smisDataSet.Groups)
             {
+                int size = this.smisDataSet.Groups.Count();
                 if (group_row.Subjects_ClassesRow == null)
                 {
-                    Errors.DisplayMinor("Invalid subject-class relations. Please contact the adminastrator");
-                    break;
+                    Errors.DisplayMinor("Invalid subject-class relations. Please contact the adminastrator\nGroup id: "+group_row.ID);
+                    continue;
                 } 
 
                 groups.Add(
